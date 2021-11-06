@@ -4819,3 +4819,188 @@ extern "C" {
 extern "C" {
     pub fn nvds_meta_get_info() -> *const GstMetaInfo;
 }
+#[doc = " Holds DeepSteam metadata."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _NvDsMeta {
+    pub meta: GstMeta,
+    #[doc = " Holds a pointer to metadata. Must be cast to another structure based"]
+    #[doc = "on @a meta_type."]
+    pub meta_data: gpointer,
+    #[doc = " Holds a pointer to user-specific data ."]
+    pub user_data: gpointer,
+    #[doc = " Holds the type of metadata, one of values of enum @ref GstNvDsMetaType."]
+    pub meta_type: gint,
+    #[doc = " A callback to be called when @a meta_data is to be copied or transformed"]
+    #[doc = "from one buffer to other. @a meta_data and @a user_data are passed"]
+    #[doc = "as arguments."]
+    pub copyfunc: NvDsMetaCopyFunc,
+    #[doc = " A callback to be called when @a meta_data is to be destroyed."]
+    #[doc = "@a meta_data and @a user_data are passed as arguments."]
+    pub freefunc: NvDsMetaReleaseFunc,
+    #[doc = " A callback to be called when @a meta_data is transformed into"]
+    #[doc = " @a NvDsUserMeta."]
+    #[doc = " This function must be provided by a GStreamer plugin that precedes"]
+    #[doc = " @a Gst-nvstreammux in the DeepStream pipeline."]
+    #[doc = " Gst-nvstreammux copies @a meta_data to"]
+    #[doc = " user meta data at frame level inside @ref NvDsFrameMeta."]
+    #[doc = " @a meta_data and @a user_data are passed as arguments."]
+    #[doc = ""]
+    #[doc = " To retrive the content of @a meta_data, iterate over"]
+    #[doc = " @ref NvDsFrameMetaList. Then search for @a meta_type of @ref NvDsUserMeta"]
+    #[doc = " which the user has attached. (See deepstream-gst-metadata-test source"]
+    #[doc = " code for more details.)"]
+    #[doc = ""]
+    #[doc = " @a meta_data and @a user_data are passed as arguments."]
+    pub gst_to_nvds_meta_transform_func: NvDsMetaCopyFunc,
+    #[doc = " A callback to be called when @a meta_data transformed into"]
+    #[doc = " @a NvDsUserMeta is to be destroyed."]
+    #[doc = " This function must be provided by a GStreamer plugin that precedes"]
+    #[doc = " @a Gst-nvstreammux in the DeepStream pipeline."]
+    pub gst_to_nvds_meta_release_func: NvDsMetaReleaseFunc,
+}
+#[test]
+fn bindgen_test_layout__NvDsMeta() {
+    assert_eq!(
+        ::std::mem::size_of::<_NvDsMeta>(),
+        72usize,
+        concat!("Size of: ", stringify!(_NvDsMeta))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_NvDsMeta>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_NvDsMeta))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_NvDsMeta>())).meta as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMeta),
+            "::",
+            stringify!(meta)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_NvDsMeta>())).meta_data as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMeta),
+            "::",
+            stringify!(meta_data)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_NvDsMeta>())).user_data as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMeta),
+            "::",
+            stringify!(user_data)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_NvDsMeta>())).meta_type as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMeta),
+            "::",
+            stringify!(meta_type)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_NvDsMeta>())).copyfunc as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMeta),
+            "::",
+            stringify!(copyfunc)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_NvDsMeta>())).freefunc as *const _ as usize },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMeta),
+            "::",
+            stringify!(freefunc)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_NvDsMeta>())).gst_to_nvds_meta_transform_func as *const _
+                as usize
+        },
+        56usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMeta),
+            "::",
+            stringify!(gst_to_nvds_meta_transform_func)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_NvDsMeta>())).gst_to_nvds_meta_release_func as *const _ as usize
+        },
+        64usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMeta),
+            "::",
+            stringify!(gst_to_nvds_meta_release_func)
+        )
+    );
+}
+#[doc = " Holds DeepSteam metadata."]
+pub type NvDsMeta = _NvDsMeta;
+extern "C" {
+    #[doc = " Adds %GstMeta of type @ref NvDsMeta to the GstBuffer and sets the @a meta_data"]
+    #[doc = " member of @ref NvDsMeta."]
+    #[doc = ""]
+    #[doc = " @param[in] buffer    A pointer to a %GstBuffer to which the function adds"]
+    #[doc = "                      metadata."]
+    #[doc = " @param[in] meta_data A pointer at which the function sets the @a meta_data"]
+    #[doc = "                      member of @ref NvDsMeta."]
+    #[doc = " @param[in] user_data A pointer to the user-specific data."]
+    #[doc = " @param[in] copy_func The callback to be called when"]
+    #[doc = "                      NvDsMeta is to be copied. The function is called with"]
+    #[doc = "                      @a meta_data and @a user_data as parameters."]
+    #[doc = " @param[in] release_func"]
+    #[doc = "                      The callback to be called when"]
+    #[doc = "                      NvDsMeta is to be destroyed. The function is called with"]
+    #[doc = "                      @a meta_data and @a user_data as parameters."]
+    #[doc = ""]
+    #[doc = " @return  A pointer to the attached NvDsMeta structure if successful,"]
+    #[doc = "  or NULL otherwise."]
+    pub fn gst_buffer_add_nvds_meta(
+        buffer: *mut GstBuffer,
+        meta_data: gpointer,
+        user_data: gpointer,
+        copy_func: NvDsMetaCopyFunc,
+        release_func: NvDsMetaReleaseFunc,
+    ) -> *mut NvDsMeta;
+}
+extern "C" {
+    #[doc = " Gets the @ref NvDsMeta last added to a GstBuffer."]
+    #[doc = ""]
+    #[doc = " @param[in] buffer    A pointer to the GstBuffer."]
+    #[doc = ""]
+    #[doc = " @return  A pointer to the last added NvDsMeta structure, or NULL if no"]
+    #[doc = "          %NvDsMeta was attached."]
+    pub fn gst_buffer_get_nvds_meta(buffer: *mut GstBuffer) -> *mut NvDsMeta;
+}
+extern "C" {
+    #[doc = " Gets the @ref NvDsBatchMeta added to a GstBuffer."]
+    #[doc = ""]
+    #[doc = " @param[in] buffer    A pointer to the GstBuffer."]
+    #[doc = ""]
+    #[doc = " @return  A pointer to the NvDsBatchMeta structure, or NULL if no"]
+    #[doc = "          NvDsMeta was attached."]
+    pub fn gst_buffer_get_nvds_batch_meta(buffer: *mut GstBuffer) -> *mut NvDsBatchMeta;
+}
