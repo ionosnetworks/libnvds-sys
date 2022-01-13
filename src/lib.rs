@@ -5,6 +5,5 @@
 #[allow(unused_imports)]
 use libc::*;
 
-// bindgen /opt/nvidia/deepstream/deepstream/sources/includes/gstnvdsmeta.h -o src/bindings.rs --whitelist-function '^nvds_.*' --whitelist-function '^gst_.*_nvds_.*' --whitelist-var '^NvDs.*' -- $(pkg-config --cflags gstreamer-1.0) -I/opt/nvidia/deepstream/deepstream/sources/includes/
+// bindgen wrapper.h -o src/bindings.rs --whitelist-function '^nvds_.*' --whitelist-function '^gst_.*_nvds_.*' --whitelist-var '^NvDs.*' --whitelist-type '^NvDs.*' -- $(pkg-config --cflags gstreamer-1.0) -I/opt/nvidia/deepstream/deepstream/sources/includes/
 include!("./bindings.rs");
-

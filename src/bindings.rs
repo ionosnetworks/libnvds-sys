@@ -1798,6 +1798,28 @@ pub type NvDsFrameMeta = _NvDsFrameMeta;
 pub type NvDsClassifierMetaList = GList;
 #[doc = " user meta list"]
 pub type NvDsUserMetaList = GList;
+#[doc = " FP32 data type"]
+pub const NvDsDataType_NvDsDataType_FP32: NvDsDataType = 0;
+#[doc = " UINT8 data type"]
+pub const NvDsDataType_NvDsDataType_UINT8: NvDsDataType = 1;
+#[doc = " INT8 data type"]
+pub const NvDsDataType_NvDsDataType_INT8: NvDsDataType = 2;
+#[doc = " UINT32 data type"]
+pub const NvDsDataType_NvDsDataType_UINT32: NvDsDataType = 3;
+#[doc = " INT32 data type"]
+pub const NvDsDataType_NvDsDataType_INT32: NvDsDataType = 4;
+#[doc = " FP16 data type"]
+pub const NvDsDataType_NvDsDataType_FP16: NvDsDataType = 5;
+#[doc = " Data type used for model in infer"]
+pub type NvDsDataType = ::std::os::raw::c_uint;
+#[doc = " Full frames"]
+pub const NvDsUnitType_NvDsUnitType_FullFrame: NvDsUnitType = 0;
+#[doc = " Region of Interests (ROIs)"]
+pub const NvDsUnitType_NvDsUnitType_ROI: NvDsUnitType = 1;
+#[doc = " object mode"]
+pub const NvDsUnitType_NvDsUnitType_Object: NvDsUnitType = 2;
+#[doc = " Unit Type Fullframe/ROI/Crop Objects"]
+pub type NvDsUnitType = ::std::os::raw::c_uint;
 #[doc = " Holds Information about ROI Metadata"]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -1944,6 +1966,7 @@ pub type NvDsObjectMetaList = GList;
 pub type NvDisplayMetaList = GList;
 pub type NvDsLabelInfoList = GList;
 pub type NvDsMetaList = GList;
+pub type NvDsElementMeta = ::std::os::raw::c_void;
 #[doc = " \\brief  Defines the type of a callback to copy metadata."]
 #[doc = ""]
 #[doc = " The callback is passed pointers to source metadata. It allocates the"]
@@ -4678,6 +4701,203 @@ extern "C" {
         dst_frame_meta: *mut NvDsAudioFrameMeta,
     );
 }
+#[doc = " Holds information about latency of the given subcomponent"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _NvDsMetaSubCompLatency {
+    #[doc = " Holds the subcomponent names."]
+    pub sub_comp_name: [gchar; 64usize],
+    #[doc = " Holds the system timestamp of the buffer when it arrives"]
+    #[doc = "at the input of the component."]
+    pub in_system_timestamp: gdouble,
+    #[doc = " Holds the system timestamp of the buffer when it leaves"]
+    #[doc = "at the output of the component."]
+    pub out_system_timestamp: gdouble,
+}
+#[test]
+fn bindgen_test_layout__NvDsMetaSubCompLatency() {
+    assert_eq!(
+        ::std::mem::size_of::<_NvDsMetaSubCompLatency>(),
+        80usize,
+        concat!("Size of: ", stringify!(_NvDsMetaSubCompLatency))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_NvDsMetaSubCompLatency>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_NvDsMetaSubCompLatency))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_NvDsMetaSubCompLatency>())).sub_comp_name as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMetaSubCompLatency),
+            "::",
+            stringify!(sub_comp_name)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_NvDsMetaSubCompLatency>())).in_system_timestamp as *const _
+                as usize
+        },
+        64usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMetaSubCompLatency),
+            "::",
+            stringify!(in_system_timestamp)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_NvDsMetaSubCompLatency>())).out_system_timestamp as *const _
+                as usize
+        },
+        72usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMetaSubCompLatency),
+            "::",
+            stringify!(out_system_timestamp)
+        )
+    );
+}
+#[doc = " Holds information about latency of the given subcomponent"]
+pub type NvDsMetaSubCompLatency = _NvDsMetaSubCompLatency;
+#[doc = " Holds information about latency of the given component"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _NvDsMetaCompLatency {
+    #[doc = " Holds the name of the component for which latency is measured."]
+    pub component_name: [gchar; 64usize],
+    #[doc = " Holds the system timestamp of the buffer when it arrives"]
+    #[doc = "at the input of the component."]
+    pub in_system_timestamp: gdouble,
+    #[doc = " Holds the system timestamp of buffer when it"]
+    #[doc = "is sent to the downstream component."]
+    pub out_system_timestamp: gdouble,
+    #[doc = " Holds the source ID of the component, e.g. the camera ID."]
+    pub source_id: guint,
+    #[doc = " Holds the current frame number for which latency is measured."]
+    pub frame_num: guint,
+    #[doc = " Holds the pad or port index of the stream muxer for the frame"]
+    #[doc = "in the batch."]
+    pub pad_index: guint,
+    #[doc = " Holds latency information of subcomponent in an array"]
+    pub sub_comp_latencies: [NvDsMetaSubCompLatency; 16usize],
+    #[doc = " Holds the number of subcomponents for the given component"]
+    pub num_sub_comps: guint,
+}
+#[test]
+fn bindgen_test_layout__NvDsMetaCompLatency() {
+    assert_eq!(
+        ::std::mem::size_of::<_NvDsMetaCompLatency>(),
+        1384usize,
+        concat!("Size of: ", stringify!(_NvDsMetaCompLatency))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_NvDsMetaCompLatency>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_NvDsMetaCompLatency))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_NvDsMetaCompLatency>())).component_name as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMetaCompLatency),
+            "::",
+            stringify!(component_name)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_NvDsMetaCompLatency>())).in_system_timestamp as *const _
+                as usize
+        },
+        64usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMetaCompLatency),
+            "::",
+            stringify!(in_system_timestamp)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_NvDsMetaCompLatency>())).out_system_timestamp as *const _
+                as usize
+        },
+        72usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMetaCompLatency),
+            "::",
+            stringify!(out_system_timestamp)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_NvDsMetaCompLatency>())).source_id as *const _ as usize },
+        80usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMetaCompLatency),
+            "::",
+            stringify!(source_id)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_NvDsMetaCompLatency>())).frame_num as *const _ as usize },
+        84usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMetaCompLatency),
+            "::",
+            stringify!(frame_num)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<_NvDsMetaCompLatency>())).pad_index as *const _ as usize },
+        88usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMetaCompLatency),
+            "::",
+            stringify!(pad_index)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_NvDsMetaCompLatency>())).sub_comp_latencies as *const _ as usize
+        },
+        96usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMetaCompLatency),
+            "::",
+            stringify!(sub_comp_latencies)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<_NvDsMetaCompLatency>())).num_sub_comps as *const _ as usize
+        },
+        1376usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(_NvDsMetaCompLatency),
+            "::",
+            stringify!(num_sub_comps)
+        )
+    );
+}
+#[doc = " Holds information about latency of the given component"]
+pub type NvDsMetaCompLatency = _NvDsMetaCompLatency;
 #[doc = " Holds information about the latency of a given frame."]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -5003,4 +5223,913 @@ extern "C" {
     #[doc = " @return  A pointer to the NvDsBatchMeta structure, or NULL if no"]
     #[doc = "          NvDsMeta was attached."]
     pub fn gst_buffer_get_nvds_batch_meta(buffer: *mut GstBuffer) -> *mut NvDsBatchMeta;
+}
+#[doc = " Holds the dimensions of a layer."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvDsInferDims {
+    #[doc = " Holds the number of dimesions in the layer."]
+    pub numDims: ::std::os::raw::c_uint,
+    #[doc = " Holds the size of the layer in each dimension."]
+    pub d: [::std::os::raw::c_uint; 8usize],
+    #[doc = " Holds the number of elements in the layer, including all dimensions."]
+    pub numElements: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout_NvDsInferDims() {
+    assert_eq!(
+        ::std::mem::size_of::<NvDsInferDims>(),
+        40usize,
+        concat!("Size of: ", stringify!(NvDsInferDims))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvDsInferDims>(),
+        4usize,
+        concat!("Alignment of ", stringify!(NvDsInferDims))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferDims>())).numDims as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferDims),
+            "::",
+            stringify!(numDims)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferDims>())).d as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferDims),
+            "::",
+            stringify!(d)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferDims>())).numElements as *const _ as usize },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferDims),
+            "::",
+            stringify!(numElements)
+        )
+    );
+}
+#[doc = " Holds the dimensions of a three-dimensional layer."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvDsInferDimsCHW {
+    #[doc = " Holds the channel count of the layer."]
+    pub c: ::std::os::raw::c_uint,
+    #[doc = " Holds the height of the layer."]
+    pub h: ::std::os::raw::c_uint,
+    #[doc = " Holds the width of the layer."]
+    pub w: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout_NvDsInferDimsCHW() {
+    assert_eq!(
+        ::std::mem::size_of::<NvDsInferDimsCHW>(),
+        12usize,
+        concat!("Size of: ", stringify!(NvDsInferDimsCHW))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvDsInferDimsCHW>(),
+        4usize,
+        concat!("Alignment of ", stringify!(NvDsInferDimsCHW))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferDimsCHW>())).c as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferDimsCHW),
+            "::",
+            stringify!(c)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferDimsCHW>())).h as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferDimsCHW),
+            "::",
+            stringify!(h)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferDimsCHW>())).w as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferDimsCHW),
+            "::",
+            stringify!(w)
+        )
+    );
+}
+#[doc = " Specifies FP32 format."]
+pub const NvDsInferDataType_FLOAT: NvDsInferDataType = 0;
+#[doc = " Specifies FP16 format."]
+pub const NvDsInferDataType_HALF: NvDsInferDataType = 1;
+#[doc = " Specifies INT8 format."]
+pub const NvDsInferDataType_INT8: NvDsInferDataType = 2;
+#[doc = " Specifies INT32 format."]
+pub const NvDsInferDataType_INT32: NvDsInferDataType = 3;
+#[doc = " Specifies the data type of a layer."]
+pub type NvDsInferDataType = ::std::os::raw::c_uint;
+#[doc = " Holds information about one layer in the model."]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct NvDsInferLayerInfo {
+    #[doc = " Holds the data type of the layer."]
+    pub dataType: NvDsInferDataType,
+    pub __bindgen_anon_1: NvDsInferLayerInfo__bindgen_ty_1,
+    #[doc = " Holds the TensorRT binding index of the layer."]
+    pub bindingIndex: ::std::os::raw::c_int,
+    #[doc = " Holds the name of the layer."]
+    pub layerName: *const ::std::os::raw::c_char,
+    #[doc = " Holds a pointer to the buffer for the layer data."]
+    pub buffer: *mut ::std::os::raw::c_void,
+    #[doc = " Holds a Boolean; true if the layer is an input layer,"]
+    #[doc = "or false if an output layer."]
+    pub isInput: ::std::os::raw::c_int,
+}
+#[doc = " Holds the dimensions of the layer."]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union NvDsInferLayerInfo__bindgen_ty_1 {
+    pub inferDims: NvDsInferDims,
+    pub dims: NvDsInferDims,
+}
+#[test]
+fn bindgen_test_layout_NvDsInferLayerInfo__bindgen_ty_1() {
+    assert_eq!(
+        ::std::mem::size_of::<NvDsInferLayerInfo__bindgen_ty_1>(),
+        40usize,
+        concat!("Size of: ", stringify!(NvDsInferLayerInfo__bindgen_ty_1))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvDsInferLayerInfo__bindgen_ty_1>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(NvDsInferLayerInfo__bindgen_ty_1)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferLayerInfo__bindgen_ty_1>())).inferDims as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferLayerInfo__bindgen_ty_1),
+            "::",
+            stringify!(inferDims)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferLayerInfo__bindgen_ty_1>())).dims as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferLayerInfo__bindgen_ty_1),
+            "::",
+            stringify!(dims)
+        )
+    );
+}
+#[test]
+fn bindgen_test_layout_NvDsInferLayerInfo() {
+    assert_eq!(
+        ::std::mem::size_of::<NvDsInferLayerInfo>(),
+        72usize,
+        concat!("Size of: ", stringify!(NvDsInferLayerInfo))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvDsInferLayerInfo>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvDsInferLayerInfo))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferLayerInfo>())).dataType as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferLayerInfo),
+            "::",
+            stringify!(dataType)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferLayerInfo>())).bindingIndex as *const _ as usize },
+        44usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferLayerInfo),
+            "::",
+            stringify!(bindingIndex)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferLayerInfo>())).layerName as *const _ as usize },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferLayerInfo),
+            "::",
+            stringify!(layerName)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferLayerInfo>())).buffer as *const _ as usize },
+        56usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferLayerInfo),
+            "::",
+            stringify!(buffer)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferLayerInfo>())).isInput as *const _ as usize },
+        64usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferLayerInfo),
+            "::",
+            stringify!(isInput)
+        )
+    );
+}
+#[doc = " Holds information about the model network."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvDsInferNetworkInfo {
+    #[doc = " Holds the input width for the model."]
+    pub width: ::std::os::raw::c_uint,
+    #[doc = " Holds the input height for the model."]
+    pub height: ::std::os::raw::c_uint,
+    #[doc = " Holds the number of input channels for the model."]
+    pub channels: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout_NvDsInferNetworkInfo() {
+    assert_eq!(
+        ::std::mem::size_of::<NvDsInferNetworkInfo>(),
+        12usize,
+        concat!("Size of: ", stringify!(NvDsInferNetworkInfo))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvDsInferNetworkInfo>(),
+        4usize,
+        concat!("Alignment of ", stringify!(NvDsInferNetworkInfo))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferNetworkInfo>())).width as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferNetworkInfo),
+            "::",
+            stringify!(width)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferNetworkInfo>())).height as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferNetworkInfo),
+            "::",
+            stringify!(height)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferNetworkInfo>())).channels as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferNetworkInfo),
+            "::",
+            stringify!(channels)
+        )
+    );
+}
+#[doc = " Holds information about one parsed object from a detector's output."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvDsInferObjectDetectionInfo {
+    #[doc = " Holds the ID of the class to which the object belongs."]
+    pub classId: ::std::os::raw::c_uint,
+    #[doc = " Holds the horizontal offset of the bounding box shape for the object."]
+    pub left: f32,
+    #[doc = " Holds the vertical offset of the object's bounding box."]
+    pub top: f32,
+    #[doc = " Holds the width of the object's bounding box."]
+    pub width: f32,
+    #[doc = " Holds the height of the object's bounding box."]
+    pub height: f32,
+    #[doc = " Holds the object detection confidence level; must in the range"]
+    #[doc = "[0.0,1.0]."]
+    pub detectionConfidence: f32,
+}
+#[test]
+fn bindgen_test_layout_NvDsInferObjectDetectionInfo() {
+    assert_eq!(
+        ::std::mem::size_of::<NvDsInferObjectDetectionInfo>(),
+        24usize,
+        concat!("Size of: ", stringify!(NvDsInferObjectDetectionInfo))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvDsInferObjectDetectionInfo>(),
+        4usize,
+        concat!("Alignment of ", stringify!(NvDsInferObjectDetectionInfo))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferObjectDetectionInfo>())).classId as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferObjectDetectionInfo),
+            "::",
+            stringify!(classId)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferObjectDetectionInfo>())).left as *const _ as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferObjectDetectionInfo),
+            "::",
+            stringify!(left)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferObjectDetectionInfo>())).top as *const _ as usize
+        },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferObjectDetectionInfo),
+            "::",
+            stringify!(top)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferObjectDetectionInfo>())).width as *const _ as usize
+        },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferObjectDetectionInfo),
+            "::",
+            stringify!(width)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferObjectDetectionInfo>())).height as *const _ as usize
+        },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferObjectDetectionInfo),
+            "::",
+            stringify!(height)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferObjectDetectionInfo>())).detectionConfidence as *const _
+                as usize
+        },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferObjectDetectionInfo),
+            "::",
+            stringify!(detectionConfidence)
+        )
+    );
+}
+#[doc = " A typedef defined to maintain backward compatibility."]
+pub type NvDsInferParseObjectInfo = NvDsInferObjectDetectionInfo;
+#[doc = " Holds information about one parsed object and instance mask from a detector's output."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvDsInferInstanceMaskInfo {
+    #[doc = " Holds the ID of the class to which the object belongs."]
+    pub classId: ::std::os::raw::c_uint,
+    #[doc = " Holds the horizontal offset of the bounding box shape for the object."]
+    pub left: f32,
+    #[doc = " Holds the vertical offset of the object's bounding box."]
+    pub top: f32,
+    #[doc = " Holds the width of the object's bounding box."]
+    pub width: f32,
+    #[doc = " Holds the height of the object's bounding box."]
+    pub height: f32,
+    #[doc = " Holds the object detection confidence level; must in the range"]
+    #[doc = "[0.0,1.0]."]
+    pub detectionConfidence: f32,
+    #[doc = " Holds object segment mask"]
+    pub mask: *mut f32,
+    #[doc = " Holds width of mask"]
+    pub mask_width: ::std::os::raw::c_uint,
+    #[doc = " Holds height of mask"]
+    pub mask_height: ::std::os::raw::c_uint,
+    #[doc = " Holds size of mask in bytes"]
+    pub mask_size: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout_NvDsInferInstanceMaskInfo() {
+    assert_eq!(
+        ::std::mem::size_of::<NvDsInferInstanceMaskInfo>(),
+        48usize,
+        concat!("Size of: ", stringify!(NvDsInferInstanceMaskInfo))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvDsInferInstanceMaskInfo>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvDsInferInstanceMaskInfo))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferInstanceMaskInfo>())).classId as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferInstanceMaskInfo),
+            "::",
+            stringify!(classId)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferInstanceMaskInfo>())).left as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferInstanceMaskInfo),
+            "::",
+            stringify!(left)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferInstanceMaskInfo>())).top as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferInstanceMaskInfo),
+            "::",
+            stringify!(top)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferInstanceMaskInfo>())).width as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferInstanceMaskInfo),
+            "::",
+            stringify!(width)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferInstanceMaskInfo>())).height as *const _ as usize
+        },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferInstanceMaskInfo),
+            "::",
+            stringify!(height)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferInstanceMaskInfo>())).detectionConfidence as *const _
+                as usize
+        },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferInstanceMaskInfo),
+            "::",
+            stringify!(detectionConfidence)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferInstanceMaskInfo>())).mask as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferInstanceMaskInfo),
+            "::",
+            stringify!(mask)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferInstanceMaskInfo>())).mask_width as *const _ as usize
+        },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferInstanceMaskInfo),
+            "::",
+            stringify!(mask_width)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferInstanceMaskInfo>())).mask_height as *const _ as usize
+        },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferInstanceMaskInfo),
+            "::",
+            stringify!(mask_height)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferInstanceMaskInfo>())).mask_size as *const _ as usize
+        },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferInstanceMaskInfo),
+            "::",
+            stringify!(mask_size)
+        )
+    );
+}
+#[doc = " Holds information about one classified attribute."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvDsInferAttribute {
+    #[doc = " Holds the index of the attribute's label. This index corresponds to"]
+    #[doc = "the order of output layers specified in the @a outputCoverageLayerNames"]
+    #[doc = "vector during initialization."]
+    pub attributeIndex: ::std::os::raw::c_uint,
+    #[doc = " Holds the the attribute's output value."]
+    pub attributeValue: ::std::os::raw::c_uint,
+    #[doc = " Holds the attribute's confidence level."]
+    pub attributeConfidence: f32,
+    #[doc = " Holds a pointer to a string containing the attribute's label."]
+    #[doc = "Memory for the string must not be freed. Custom parsing functions must"]
+    #[doc = "allocate strings on heap using strdup or equivalent."]
+    pub attributeLabel: *mut ::std::os::raw::c_char,
+}
+#[test]
+fn bindgen_test_layout_NvDsInferAttribute() {
+    assert_eq!(
+        ::std::mem::size_of::<NvDsInferAttribute>(),
+        24usize,
+        concat!("Size of: ", stringify!(NvDsInferAttribute))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvDsInferAttribute>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvDsInferAttribute))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferAttribute>())).attributeIndex as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferAttribute),
+            "::",
+            stringify!(attributeIndex)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferAttribute>())).attributeValue as *const _ as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferAttribute),
+            "::",
+            stringify!(attributeValue)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferAttribute>())).attributeConfidence as *const _ as usize
+        },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferAttribute),
+            "::",
+            stringify!(attributeConfidence)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferAttribute>())).attributeLabel as *const _ as usize
+        },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferAttribute),
+            "::",
+            stringify!(attributeLabel)
+        )
+    );
+}
+#[doc = " NvDsInferContext operation succeeded."]
+pub const NvDsInferStatus_NVDSINFER_SUCCESS: NvDsInferStatus = 0;
+#[doc = " Failed to configure the NvDsInferContext instance possibly due to an"]
+#[doc = "  erroneous initialization property."]
+pub const NvDsInferStatus_NVDSINFER_CONFIG_FAILED: NvDsInferStatus = 1;
+#[doc = " Custom Library interface implementation failed."]
+pub const NvDsInferStatus_NVDSINFER_CUSTOM_LIB_FAILED: NvDsInferStatus = 2;
+#[doc = " Invalid parameters were supplied."]
+pub const NvDsInferStatus_NVDSINFER_INVALID_PARAMS: NvDsInferStatus = 3;
+#[doc = " Output parsing failed."]
+pub const NvDsInferStatus_NVDSINFER_OUTPUT_PARSING_FAILED: NvDsInferStatus = 4;
+#[doc = " CUDA error was encountered."]
+pub const NvDsInferStatus_NVDSINFER_CUDA_ERROR: NvDsInferStatus = 5;
+#[doc = " TensorRT interface failed."]
+pub const NvDsInferStatus_NVDSINFER_TENSORRT_ERROR: NvDsInferStatus = 6;
+#[doc = " Resource error was encountered."]
+pub const NvDsInferStatus_NVDSINFER_RESOURCE_ERROR: NvDsInferStatus = 7;
+#[doc = " Triton error was encountered. Renamed TRT-IS to Triton."]
+pub const NvDsInferStatus_NVDSINFER_TRITON_ERROR: NvDsInferStatus = 8;
+#[doc = " [deprecated]TRT-IS error was encountered"]
+pub const NvDsInferStatus_NVDSINFER_TRTIS_ERROR: NvDsInferStatus = 8;
+#[doc = " Unknown error was encountered."]
+pub const NvDsInferStatus_NVDSINFER_UNKNOWN_ERROR: NvDsInferStatus = 9;
+#[doc = " Enum for the status codes returned by NvDsInferContext."]
+pub type NvDsInferStatus = ::std::os::raw::c_uint;
+pub const NvDsInferLogLevel_NVDSINFER_LOG_ERROR: NvDsInferLogLevel = 0;
+pub const NvDsInferLogLevel_NVDSINFER_LOG_WARNING: NvDsInferLogLevel = 1;
+pub const NvDsInferLogLevel_NVDSINFER_LOG_INFO: NvDsInferLogLevel = 2;
+pub const NvDsInferLogLevel_NVDSINFER_LOG_DEBUG: NvDsInferLogLevel = 3;
+#[doc = " Enum for the log levels of NvDsInferContext."]
+pub type NvDsInferLogLevel = ::std::os::raw::c_uint;
+#[doc = " Holds the raw tensor output information for one frame / one object."]
+#[doc = ""]
+#[doc = " The \"nvinfer\" plugins adds this meta when the \"output-tensor-meta\" property"]
+#[doc = " of the element instance is set to TRUE."]
+#[doc = ""]
+#[doc = " This meta data is added as NvDsUserMeta to the frame_user_meta_list of the"]
+#[doc = " corresponding frame_meta or object_user_meta_list of the corresponding object"]
+#[doc = " with the meta_type set to NVDSINFER_TENSOR_OUTPUT_META."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvDsInferTensorMeta {
+    #[doc = " Unique ID of the gst-nvinfer instance which attached this meta."]
+    pub unique_id: guint,
+    #[doc = " Number of bound output layers."]
+    pub num_output_layers: guint,
+    #[doc = " Pointer to the array containing information for the bound output layers."]
+    #[doc = " Size of the array will be equal to num_output_layers. Pointers inside"]
+    #[doc = " the NvDsInferLayerInfo structure are not valid for this array."]
+    pub output_layers_info: *mut NvDsInferLayerInfo,
+    #[doc = " Array of pointers to the output host buffers for the batch / frame / object."]
+    pub out_buf_ptrs_host: *mut *mut ::std::os::raw::c_void,
+    #[doc = " Array of pointers to the output device buffers for the batch / frame / object."]
+    pub out_buf_ptrs_dev: *mut *mut ::std::os::raw::c_void,
+    #[doc = " GPU device ID on which the device buffers have been allocated."]
+    pub gpu_id: gint,
+    #[doc = " Private data used for the meta producer's internal memory management."]
+    pub priv_data: *mut ::std::os::raw::c_void,
+    #[doc = " Network information for the model specified for the nvinfer element instance."]
+    pub network_info: NvDsInferNetworkInfo,
+}
+#[test]
+fn bindgen_test_layout_NvDsInferTensorMeta() {
+    assert_eq!(
+        ::std::mem::size_of::<NvDsInferTensorMeta>(),
+        64usize,
+        concat!("Size of: ", stringify!(NvDsInferTensorMeta))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvDsInferTensorMeta>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvDsInferTensorMeta))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferTensorMeta>())).unique_id as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferTensorMeta),
+            "::",
+            stringify!(unique_id)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferTensorMeta>())).num_output_layers as *const _ as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferTensorMeta),
+            "::",
+            stringify!(num_output_layers)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferTensorMeta>())).output_layers_info as *const _ as usize
+        },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferTensorMeta),
+            "::",
+            stringify!(output_layers_info)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferTensorMeta>())).out_buf_ptrs_host as *const _ as usize
+        },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferTensorMeta),
+            "::",
+            stringify!(out_buf_ptrs_host)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferTensorMeta>())).out_buf_ptrs_dev as *const _ as usize
+        },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferTensorMeta),
+            "::",
+            stringify!(out_buf_ptrs_dev)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferTensorMeta>())).gpu_id as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferTensorMeta),
+            "::",
+            stringify!(gpu_id)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferTensorMeta>())).priv_data as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferTensorMeta),
+            "::",
+            stringify!(priv_data)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferTensorMeta>())).network_info as *const _ as usize
+        },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferTensorMeta),
+            "::",
+            stringify!(network_info)
+        )
+    );
+}
+#[doc = " Holds the segmentation model output information for one frame / one object."]
+#[doc = ""]
+#[doc = " The \"nvinfer\" plugins adds this meta for segmentation models."]
+#[doc = ""]
+#[doc = " This meta data is added as NvDsUserMeta to the frame_user_meta_list of the"]
+#[doc = " corresponding frame_meta or object_user_meta_list of the corresponding object"]
+#[doc = " with the meta_type set to NVDSINFER_SEGMENTATION_META."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvDsInferSegmentationMeta {
+    #[doc = " Number of classes in the segmentation output."]
+    pub classes: guint,
+    #[doc = " Width of the segmentation output class map."]
+    pub width: guint,
+    #[doc = " Height of the segmentation output class map."]
+    pub height: guint,
+    #[doc = " Pointer to the array for 2D pixel class map. The output for pixel (x,y)"]
+    #[doc = " will be at index (y * width + x)."]
+    pub class_map: *mut gint,
+    #[doc = " Pointer to the raw array containing the probabilities. The probability for"]
+    #[doc = " class c and pixel (x,y) will be at index (c * width *height + y * width + x)."]
+    pub class_probabilities_map: *mut gfloat,
+    #[doc = " Private data used for the meta producer's internal memory management."]
+    pub priv_data: *mut ::std::os::raw::c_void,
+}
+#[test]
+fn bindgen_test_layout_NvDsInferSegmentationMeta() {
+    assert_eq!(
+        ::std::mem::size_of::<NvDsInferSegmentationMeta>(),
+        40usize,
+        concat!("Size of: ", stringify!(NvDsInferSegmentationMeta))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvDsInferSegmentationMeta>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvDsInferSegmentationMeta))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferSegmentationMeta>())).classes as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferSegmentationMeta),
+            "::",
+            stringify!(classes)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvDsInferSegmentationMeta>())).width as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferSegmentationMeta),
+            "::",
+            stringify!(width)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferSegmentationMeta>())).height as *const _ as usize
+        },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferSegmentationMeta),
+            "::",
+            stringify!(height)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferSegmentationMeta>())).class_map as *const _ as usize
+        },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferSegmentationMeta),
+            "::",
+            stringify!(class_map)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferSegmentationMeta>())).class_probabilities_map
+                as *const _ as usize
+        },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferSegmentationMeta),
+            "::",
+            stringify!(class_probabilities_map)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferSegmentationMeta>())).priv_data as *const _ as usize
+        },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferSegmentationMeta),
+            "::",
+            stringify!(priv_data)
+        )
+    );
 }
