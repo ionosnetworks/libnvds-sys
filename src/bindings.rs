@@ -4162,6 +4162,245 @@ pub const NvBufAudioLayout_NVBUF_AUDIO_INTERLEAVED: NvBufAudioLayout = 1;
 pub const NvBufAudioLayout_NVBUF_AUDIO_NON_INTERLEAVED: NvBufAudioLayout = 2;
 #[doc = " Specifies audio data layout in memory"]
 pub type NvBufAudioLayout = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvBufAudioParams {
+    pub layout: NvBufAudioLayout,
+    pub format: NvBufAudioFormat,
+    #[doc = "< Bytes per frame; the size of a frame;"]
+    #[doc = " size of one sample * @channels"]
+    pub bpf: u32,
+    #[doc = "< Number of audio channels"]
+    pub channels: u32,
+    #[doc = "< audio sample rate in samples per second"]
+    pub rate: u32,
+    pub dataSize: u32,
+    pub dataPtr: *mut ::std::os::raw::c_void,
+    #[doc = " Holds the pad or port index of the Gst-streammux plugin for the frame"]
+    #[doc = " in the batch."]
+    pub padId: u32,
+    #[doc = " source ID of this buffer;"]
+    #[doc = " This is w.r.t the multisrc DeepStream usecases"]
+    pub sourceId: u32,
+    #[doc = " NTP Timestamp of this audio buffer"]
+    pub ntpTimestamp: u64,
+    #[doc = " Buffer PTS of this audio buffer"]
+    pub bufPts: u64,
+    #[doc = " duration of this audio buffer"]
+    pub duration: u64,
+    pub reserved: [u8; 16usize],
+}
+#[test]
+fn bindgen_test_layout_NvBufAudioParams() {
+    assert_eq!(
+        ::std::mem::size_of::<NvBufAudioParams>(),
+        80usize,
+        concat!("Size of: ", stringify!(NvBufAudioParams))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvBufAudioParams>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvBufAudioParams))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudioParams>())).layout as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudioParams),
+            "::",
+            stringify!(layout)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudioParams>())).format as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudioParams),
+            "::",
+            stringify!(format)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudioParams>())).bpf as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudioParams),
+            "::",
+            stringify!(bpf)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudioParams>())).channels as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudioParams),
+            "::",
+            stringify!(channels)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudioParams>())).rate as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudioParams),
+            "::",
+            stringify!(rate)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudioParams>())).dataSize as *const _ as usize },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudioParams),
+            "::",
+            stringify!(dataSize)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudioParams>())).dataPtr as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudioParams),
+            "::",
+            stringify!(dataPtr)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudioParams>())).padId as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudioParams),
+            "::",
+            stringify!(padId)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudioParams>())).sourceId as *const _ as usize },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudioParams),
+            "::",
+            stringify!(sourceId)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudioParams>())).ntpTimestamp as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudioParams),
+            "::",
+            stringify!(ntpTimestamp)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudioParams>())).bufPts as *const _ as usize },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudioParams),
+            "::",
+            stringify!(bufPts)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudioParams>())).duration as *const _ as usize },
+        56usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudioParams),
+            "::",
+            stringify!(duration)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudioParams>())).reserved as *const _ as usize },
+        64usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudioParams),
+            "::",
+            stringify!(reserved)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvBufAudio {
+    #[doc = " The size of this NvBufAudio batch"]
+    pub numFilled: u32,
+    #[doc = " The size of this NvBufAudio batch"]
+    pub batchSize: u32,
+    #[doc = " isContiguous is true when"]
+    #[doc = " the dataPtr in audioBuffers[] array is"]
+    #[doc = " contiguous with the previous and following entry"]
+    #[doc = " in the array"]
+    pub isContiguous: bool,
+    #[doc = " Array of #batchSize audio bufffers"]
+    pub audioBuffers: *mut NvBufAudioParams,
+}
+#[test]
+fn bindgen_test_layout_NvBufAudio() {
+    assert_eq!(
+        ::std::mem::size_of::<NvBufAudio>(),
+        24usize,
+        concat!("Size of: ", stringify!(NvBufAudio))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvBufAudio>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvBufAudio))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudio>())).numFilled as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudio),
+            "::",
+            stringify!(numFilled)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudio>())).batchSize as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudio),
+            "::",
+            stringify!(batchSize)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudio>())).isContiguous as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudio),
+            "::",
+            stringify!(isContiguous)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufAudio>())).audioBuffers as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufAudio),
+            "::",
+            stringify!(audioBuffers)
+        )
+    );
+}
 #[doc = " Holds metadata for a audio frame in a batch."]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -5960,6 +6199,35 @@ pub const NvDsInferLogLevel_NVDSINFER_LOG_INFO: NvDsInferLogLevel = 2;
 pub const NvDsInferLogLevel_NVDSINFER_LOG_DEBUG: NvDsInferLogLevel = 3;
 #[doc = " Enum for the log levels of NvDsInferContext."]
 pub type NvDsInferLogLevel = ::std::os::raw::c_uint;
+#[doc = "< Specifies \\ref NvBufSurface mapping type \"read.\""]
+pub const NvBufSurfaceMemMapFlags_NVBUF_MAP_READ: NvBufSurfaceMemMapFlags = 0;
+#[doc = "< Specifies \\ref NvBufSurface mapping type"]
+#[doc = "\"write.\""]
+pub const NvBufSurfaceMemMapFlags_NVBUF_MAP_WRITE: NvBufSurfaceMemMapFlags = 1;
+#[doc = "< Specifies \\ref NvBufSurface mapping type"]
+#[doc = "\"read/write.\""]
+pub const NvBufSurfaceMemMapFlags_NVBUF_MAP_READ_WRITE: NvBufSurfaceMemMapFlags = 2;
+#[doc = "  Defines mapping types of NvBufSurface."]
+pub type NvBufSurfaceMemMapFlags = ::std::os::raw::c_uint;
+#[doc = " tag None."]
+pub const NvBufSurfaceTag_NvBufSurfaceTag_NONE: NvBufSurfaceTag = 0;
+#[doc = " tag for Camera."]
+pub const NvBufSurfaceTag_NvBufSurfaceTag_CAMERA: NvBufSurfaceTag = 512;
+#[doc = " tag for Jpeg Encoder/Decoder."]
+pub const NvBufSurfaceTag_NvBufSurfaceTag_JPEG: NvBufSurfaceTag = 5376;
+#[doc = " tag for VPR Buffers."]
+pub const NvBufSurfaceTag_NvBufSurfaceTag_PROTECTED: NvBufSurfaceTag = 5380;
+#[doc = " tag for H264/H265 Video Encoder."]
+pub const NvBufSurfaceTag_NvBufSurfaceTag_VIDEO_ENC: NvBufSurfaceTag = 4608;
+#[doc = " tag for H264/H265/VP9 Video Decoder."]
+pub const NvBufSurfaceTag_NvBufSurfaceTag_VIDEO_DEC: NvBufSurfaceTag = 5120;
+#[doc = " tag for Video Transform/Composite/Blend."]
+pub const NvBufSurfaceTag_NvBufSurfaceTag_VIDEO_CONVERT: NvBufSurfaceTag = 3841;
+#[doc = " Defines tags that identify the components requesting a memory allocation."]
+#[doc = " The tags can be used later to identify the total memory allocated to"]
+#[doc = " particular types of components."]
+#[doc = " TODO: Check if DeepStream require more tags to be defined."]
+pub type NvBufSurfaceTag = ::std::os::raw::c_uint;
 #[doc = " Specifies an invalid color format."]
 pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_INVALID: NvBufSurfaceColorFormat = 0;
 #[doc = " Specifies 8 bit GRAY scale - single plane"]
@@ -6116,6 +6384,24 @@ pub const NvBufSurfaceLayout_NVBUF_LAYOUT_PITCH: NvBufSurfaceLayout = 0;
 pub const NvBufSurfaceLayout_NVBUF_LAYOUT_BLOCK_LINEAR: NvBufSurfaceLayout = 1;
 #[doc = " Specifies layout formats for \\ref NvBufSurface video planes."]
 pub type NvBufSurfaceLayout = ::std::os::raw::c_uint;
+#[doc = " Specifies the default memory type, i.e. \\ref NVBUF_MEM_CUDA_DEVICE"]
+#[doc = "for dGPU, \\ref NVBUF_MEM_SURFACE_ARRAY for Jetson. Use \\ref NVBUF_MEM_DEFAULT"]
+#[doc = "to allocate whichever type of memory is appropriate for the platform."]
+pub const NvBufSurfaceMemType_NVBUF_MEM_DEFAULT: NvBufSurfaceMemType = 0;
+#[doc = " Specifies CUDA Host memory type."]
+pub const NvBufSurfaceMemType_NVBUF_MEM_CUDA_PINNED: NvBufSurfaceMemType = 1;
+#[doc = " Specifies CUDA Device memory type."]
+pub const NvBufSurfaceMemType_NVBUF_MEM_CUDA_DEVICE: NvBufSurfaceMemType = 2;
+#[doc = " Specifies CUDA Unified memory type."]
+pub const NvBufSurfaceMemType_NVBUF_MEM_CUDA_UNIFIED: NvBufSurfaceMemType = 3;
+#[doc = " Specifies NVRM Surface Array type. Valid only for Jetson."]
+pub const NvBufSurfaceMemType_NVBUF_MEM_SURFACE_ARRAY: NvBufSurfaceMemType = 4;
+#[doc = " Specifies NVRM Handle type. Valid only for Jetson."]
+pub const NvBufSurfaceMemType_NVBUF_MEM_HANDLE: NvBufSurfaceMemType = 5;
+#[doc = " Specifies memory allocated by malloc()."]
+pub const NvBufSurfaceMemType_NVBUF_MEM_SYSTEM: NvBufSurfaceMemType = 6;
+#[doc = " Specifies memory types for \\ref NvBufSurface."]
+pub type NvBufSurfaceMemType = ::std::os::raw::c_uint;
 #[doc = " Progessive scan formats."]
 pub const NvBufSurfaceDisplayScanFormat_NVBUF_DISPLAYSCANFORMAT_PROGRESSIVE:
     NvBufSurfaceDisplayScanFormat = 0;
@@ -6392,6 +6678,219 @@ fn bindgen_test_layout_NvBufSurfaceChromaSubsamplingParams() {
             stringify!(NvBufSurfaceChromaSubsamplingParams),
             "::",
             stringify!(chromaLocVert)
+        )
+    );
+}
+#[doc = " Holds parameters required to allocate an \\ref NvBufSurface."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvBufSurfaceCreateParams {
+    #[doc = " Holds the GPU ID. Valid only for a multi-GPU system."]
+    pub gpuId: u32,
+    #[doc = " Holds the width of the buffer."]
+    pub width: u32,
+    #[doc = " Holds the height of the buffer."]
+    pub height: u32,
+    #[doc = " Holds the amount of memory to be allocated. Optional; if set, all other"]
+    #[doc = "parameters (width, height, etc.) are ignored."]
+    pub size: u32,
+    #[doc = " Holds a \"contiguous memory\" flag. If set, contiguous memory is allocated"]
+    #[doc = "for the batch. Valid only for CUDA memory types."]
+    pub isContiguous: bool,
+    #[doc = " Holds the color format of the buffer."]
+    pub colorFormat: NvBufSurfaceColorFormat,
+    #[doc = " Holds the surface layout. May be Block Linear (BL) or Pitch Linear (PL)."]
+    #[doc = "For a dGPU, only PL is valid."]
+    pub layout: NvBufSurfaceLayout,
+    #[doc = " Holds the type of memory to be allocated."]
+    pub memType: NvBufSurfaceMemType,
+}
+#[test]
+fn bindgen_test_layout_NvBufSurfaceCreateParams() {
+    assert_eq!(
+        ::std::mem::size_of::<NvBufSurfaceCreateParams>(),
+        32usize,
+        concat!("Size of: ", stringify!(NvBufSurfaceCreateParams))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvBufSurfaceCreateParams>(),
+        4usize,
+        concat!("Alignment of ", stringify!(NvBufSurfaceCreateParams))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceCreateParams>())).gpuId as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceCreateParams),
+            "::",
+            stringify!(gpuId)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceCreateParams>())).width as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceCreateParams),
+            "::",
+            stringify!(width)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceCreateParams>())).height as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceCreateParams),
+            "::",
+            stringify!(height)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceCreateParams>())).size as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceCreateParams),
+            "::",
+            stringify!(size)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceCreateParams>())).isContiguous as *const _ as usize
+        },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceCreateParams),
+            "::",
+            stringify!(isContiguous)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceCreateParams>())).colorFormat as *const _ as usize
+        },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceCreateParams),
+            "::",
+            stringify!(colorFormat)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceCreateParams>())).layout as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceCreateParams),
+            "::",
+            stringify!(layout)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceCreateParams>())).memType as *const _ as usize
+        },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceCreateParams),
+            "::",
+            stringify!(memType)
+        )
+    );
+}
+#[doc = " Hold extended parameters required to allocate NvBufSurface."]
+#[doc = " (Applicable for NvBufSurfaceAllocate API)"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvBufSurfaceAllocateParams {
+    #[doc = " Hold legacy NvBufSurface creation parameters"]
+    pub params: NvBufSurfaceCreateParams,
+    #[doc = " Display scan format"]
+    pub displayscanformat: NvBufSurfaceDisplayScanFormat,
+    #[doc = " Chroma Subsampling parameters"]
+    pub chromaSubsampling: NvBufSurfaceChromaSubsamplingParams,
+    #[doc = " components tag to be used for memory allocation"]
+    pub memtag: NvBufSurfaceTag,
+    pub _reserved: [*mut ::std::os::raw::c_void; 4usize],
+}
+#[test]
+fn bindgen_test_layout_NvBufSurfaceAllocateParams() {
+    assert_eq!(
+        ::std::mem::size_of::<NvBufSurfaceAllocateParams>(),
+        80usize,
+        concat!("Size of: ", stringify!(NvBufSurfaceAllocateParams))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvBufSurfaceAllocateParams>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvBufSurfaceAllocateParams))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceAllocateParams>())).params as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceAllocateParams),
+            "::",
+            stringify!(params)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceAllocateParams>())).displayscanformat as *const _
+                as usize
+        },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceAllocateParams),
+            "::",
+            stringify!(displayscanformat)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceAllocateParams>())).chromaSubsampling as *const _
+                as usize
+        },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceAllocateParams),
+            "::",
+            stringify!(chromaSubsampling)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceAllocateParams>())).memtag as *const _ as usize
+        },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceAllocateParams),
+            "::",
+            stringify!(memtag)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceAllocateParams>()))._reserved as *const _ as usize
+        },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceAllocateParams),
+            "::",
+            stringify!(_reserved)
         )
     );
 }
@@ -6712,6 +7211,109 @@ fn bindgen_test_layout_NvBufSurfaceParams() {
         concat!(
             "Offset of field: ",
             stringify!(NvBufSurfaceParams),
+            "::",
+            stringify!(_reserved)
+        )
+    );
+}
+#[doc = " Holds information about batched buffers."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvBufSurface {
+    #[doc = " Holds a GPU ID. Valid only for a multi-GPU system."]
+    pub gpuId: u32,
+    #[doc = " Holds the batch size."]
+    pub batchSize: u32,
+    #[doc = " Holds the number valid and filled buffers. Initialized to zero when"]
+    #[doc = "an instance of the structure is created."]
+    pub numFilled: u32,
+    #[doc = " Holds an \"is contiguous\" flag. If set, memory allocated for the batch"]
+    #[doc = "is contiguous."]
+    pub isContiguous: bool,
+    #[doc = " Holds type of memory for buffers in the batch."]
+    pub memType: NvBufSurfaceMemType,
+    #[doc = " Holds a pointer to an array of batched buffers."]
+    pub surfaceList: *mut NvBufSurfaceParams,
+    pub _reserved: [*mut ::std::os::raw::c_void; 4usize],
+}
+#[test]
+fn bindgen_test_layout_NvBufSurface() {
+    assert_eq!(
+        ::std::mem::size_of::<NvBufSurface>(),
+        64usize,
+        concat!("Size of: ", stringify!(NvBufSurface))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvBufSurface>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvBufSurface))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurface>())).gpuId as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurface),
+            "::",
+            stringify!(gpuId)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurface>())).batchSize as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurface),
+            "::",
+            stringify!(batchSize)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurface>())).numFilled as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurface),
+            "::",
+            stringify!(numFilled)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurface>())).isContiguous as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurface),
+            "::",
+            stringify!(isContiguous)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurface>())).memType as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurface),
+            "::",
+            stringify!(memType)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurface>())).surfaceList as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurface),
+            "::",
+            stringify!(surfaceList)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurface>()))._reserved as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurface),
             "::",
             stringify!(_reserved)
         )
