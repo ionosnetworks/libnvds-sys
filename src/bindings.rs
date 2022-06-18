@@ -4,6 +4,10 @@ pub type guint32 = ::std::os::raw::c_uint;
 pub type gint64 = ::std::os::raw::c_long;
 pub type guint64 = ::std::os::raw::c_ulong;
 pub type gsize = ::std::os::raw::c_ulong;
+pub type __uint8_t = ::std::os::raw::c_uchar;
+pub type __int32_t = ::std::os::raw::c_int;
+pub type __uint32_t = ::std::os::raw::c_uint;
+pub type __uint64_t = ::std::os::raw::c_ulong;
 pub type gchar = ::std::os::raw::c_char;
 pub type gint = ::std::os::raw::c_int;
 pub type gboolean = gint;
@@ -1787,11 +1791,6 @@ fn bindgen_test_layout__NvOSD_CircleParams() {
 }
 #[doc = " Holds circle parameters to be overlayed."]
 pub type NvOSD_CircleParams = _NvOSD_CircleParams;
-#[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct NvBufSurfaceParams {
-    _unused: [u8; 0],
-}
 #[doc = " DS NvDsFrameMeta"]
 pub type NvDsFrameMeta = _NvDsFrameMeta;
 #[doc = " classifier meta list"]
@@ -5001,15 +5000,6 @@ extern "C" {
     ) -> gboolean;
 }
 extern "C" {
-    pub fn nvds_add_sub_time(
-        buffer: *mut GstBuffer,
-        element_name: *mut gchar,
-        name: *mut gchar,
-        start_time: gdouble,
-        end_time: gdouble,
-    ) -> gboolean;
-}
-extern "C" {
     #[doc = " \\brief  Measures the latency of all frames present in the current batch."]
     #[doc = ""]
     #[doc = " The latency is computed from decoder input up to the point this API is called."]
@@ -5032,6 +5022,25 @@ extern "C" {
     #[doc = ""]
     #[doc = " @returns  True if the environment variable is exported, or false otherwise."]
     pub fn nvds_get_enable_latency_measurement() -> gboolean;
+}
+extern "C" {
+    #[doc = " Adds the reference timestamp metadata for this buffer"]
+    #[doc = " Note: element_name == \"audiodecoder\" and \"nvv4l2decoder\" will be used for"]
+    #[doc = " latency measurement calculations where the timestamp will be used"]
+    #[doc = " by API: nvds_measure_buffer_latency()"]
+    #[doc = " to calculate the latency of buffers downstream relative to the decoder."]
+    #[doc = ""]
+    #[doc = " @param[in] buffer        A pointer to the arriving Gst Buffer."]
+    #[doc = " @param[in] element_name  A pointer to the name of the component for which"]
+    #[doc = "                          latency is to be measured."]
+    #[doc = " @param[in] frame_id      The id/number of this frame/buffer produced by"]
+    #[doc = "                          the component that produces this buffer."]
+    #[doc = ""]
+    pub fn nvds_add_reference_timestamp_meta(
+        buffer: *mut GstBuffer,
+        element_name: *mut gchar,
+        frame_id: guint,
+    );
 }
 extern "C" {
     pub fn nvds_meta_api_get_type() -> GType;
@@ -5223,6 +5232,66 @@ extern "C" {
     #[doc = " @return  A pointer to the NvDsBatchMeta structure, or NULL if no"]
     #[doc = "          NvDsMeta was attached."]
     pub fn gst_buffer_get_nvds_batch_meta(buffer: *mut GstBuffer) -> *mut NvDsBatchMeta;
+}
+extern "C" {
+    #[doc = " Copies all GstMeta objects on src_gst_buffer to"]
+    #[doc = " the batched buffer's @ref NvDsBatchMeta"]
+    #[doc = " The GstMeta objects are copied into the user_meta_list"]
+    #[doc = " within @ref NvDsFrameMeta."]
+    #[doc = ""]
+    #[doc = " Note: the list of plain GstMeta from @src_gst_buffer are copied into"]
+    #[doc = " @frame_meta as a single frame_meta->user_meta"]
+    #[doc = " with NvDsUserMeta->base_meta.meta_type == @ref NVDS_USER_FRAME_META_GST_META."]
+    #[doc = " The list of N X NvDsMeta from @src_gst_buffer are copied into"]
+    #[doc = " @frame_meta as N X frame_meta->user_meta"]
+    #[doc = " with each NvDsUserMeta->base_meta.meta_type == NvDsMeta->meta_type."]
+    #[doc = ""]
+    #[doc = " @param[in] src_gst_buffer    A pointer to the GstBuffer."]
+    #[doc = "                              GstMeta objects in this GstBuffer"]
+    #[doc = "                              will be copied."]
+    #[doc = " @param[in] batch_meta        A pointer to the @ref NvDsBatchMeta obtained"]
+    #[doc = "                              from nvstreammux plugin. (Note: Works only"]
+    #[doc = "                              for nvstreammux2 (Beta))"]
+    #[doc = " @param[in] frame_meta        A pointer to the @ref NvDsFrameMeta"]
+    #[doc = "                              @ref NvDsFrameMeta (metadata) for"]
+    #[doc = "                              the batched input frame to which GstMeta objects"]
+    #[doc = "                              will be copied as frame @ref NvDsUserMeta."]
+    #[doc = ""]
+    pub fn nvds_copy_gst_meta_to_frame_meta(
+        src_gst_buffer: *mut GstBuffer,
+        batch_meta: *mut NvDsBatchMeta,
+        frame_meta: *mut NvDsFrameMeta,
+    );
+}
+extern "C" {
+    #[doc = " Copies all GstMeta objects on src_gst_buffer to"]
+    #[doc = " the batched buffer's @ref NvDsBatchMeta"]
+    #[doc = " The GstMeta objects are copied into the user_meta_list"]
+    #[doc = " within @ref NvDsAudioFrameMeta."]
+    #[doc = ""]
+    #[doc = " Note: the list of plain GstMeta from @src_gst_buffer are copied into"]
+    #[doc = " @frame_meta as a single frame_meta->user_meta"]
+    #[doc = " with NvDsUserMeta->base_meta.meta_type == @ref NVDS_USER_FRAME_META_GST_META."]
+    #[doc = " The list of N X NvDsMeta from @src_gst_buffer are copied into"]
+    #[doc = " @frame_meta as N X frame_meta->user_meta"]
+    #[doc = " with each NvDsUserMeta->base_meta.meta_type == NvDsMeta->meta_type."]
+    #[doc = ""]
+    #[doc = " @param[in] src_gst_buffer    A pointer to the GstBuffer."]
+    #[doc = "                              GstMeta objects in this GstBuffer"]
+    #[doc = "                              will be copied."]
+    #[doc = " @param[in] batch_meta        A pointer to the @ref NvDsBatchMeta obtained"]
+    #[doc = "                              from nvstreammux plugin. (Note: Works only"]
+    #[doc = "                              for nvstreammux2 (Beta))"]
+    #[doc = " @param[in] frame_meta        A pointer to the @ref NvDsAudioFrameMeta"]
+    #[doc = "                              @ref NvDsAudioFrameMeta (metadata) for"]
+    #[doc = "                              the batched input frame to which GstMeta objects"]
+    #[doc = "                              will be copied as frame @ref NvDsUserMeta."]
+    #[doc = ""]
+    pub fn nvds_copy_gst_meta_to_audio_frame_meta(
+        src_gst_buffer: *mut GstBuffer,
+        batch_meta: *mut NvDsBatchMeta,
+        frame_meta: *mut NvDsAudioFrameMeta,
+    );
 }
 #[doc = " Holds the dimensions of a layer."]
 #[repr(C)]
@@ -5891,6 +5960,763 @@ pub const NvDsInferLogLevel_NVDSINFER_LOG_INFO: NvDsInferLogLevel = 2;
 pub const NvDsInferLogLevel_NVDSINFER_LOG_DEBUG: NvDsInferLogLevel = 3;
 #[doc = " Enum for the log levels of NvDsInferContext."]
 pub type NvDsInferLogLevel = ::std::os::raw::c_uint;
+#[doc = " Specifies an invalid color format."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_INVALID: NvBufSurfaceColorFormat = 0;
+#[doc = " Specifies 8 bit GRAY scale - single plane"]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_GRAY8: NvBufSurfaceColorFormat = 1;
+#[doc = " Specifies BT.601 colorspace - YUV420 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_YUV420: NvBufSurfaceColorFormat = 2;
+#[doc = " Specifies BT.601 colorspace - YUV420 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_YVU420: NvBufSurfaceColorFormat = 3;
+#[doc = " Specifies BT.601 colorspace - YUV420 ER multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_YUV420_ER: NvBufSurfaceColorFormat = 4;
+#[doc = " Specifies BT.601 colorspace - YVU420 ER multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_YVU420_ER: NvBufSurfaceColorFormat = 5;
+#[doc = " Specifies BT.601 colorspace - Y/CbCr 4:2:0 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV12: NvBufSurfaceColorFormat = 6;
+#[doc = " Specifies BT.601 colorspace - Y/CbCr ER 4:2:0 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV12_ER: NvBufSurfaceColorFormat = 7;
+#[doc = " Specifies BT.601 colorspace - Y/CbCr 4:2:0 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV21: NvBufSurfaceColorFormat = 8;
+#[doc = " Specifies BT.601 colorspace - Y/CbCr ER 4:2:0 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV21_ER: NvBufSurfaceColorFormat = 9;
+#[doc = " Specifies BT.601 colorspace - YUV 4:2:2 planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_UYVY: NvBufSurfaceColorFormat = 10;
+#[doc = " Specifies BT.601 colorspace - YUV ER 4:2:2 planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_UYVY_ER: NvBufSurfaceColorFormat = 11;
+#[doc = " Specifies BT.601 colorspace - YUV 4:2:2 planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_VYUY: NvBufSurfaceColorFormat = 12;
+#[doc = " Specifies BT.601 colorspace - YUV ER 4:2:2 planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_VYUY_ER: NvBufSurfaceColorFormat = 13;
+#[doc = " Specifies BT.601 colorspace - YUV 4:2:2 planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_YUYV: NvBufSurfaceColorFormat = 14;
+#[doc = " Specifies BT.601 colorspace - YUV ER 4:2:2 planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_YUYV_ER: NvBufSurfaceColorFormat = 15;
+#[doc = " Specifies BT.601 colorspace - YUV 4:2:2 planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_YVYU: NvBufSurfaceColorFormat = 16;
+#[doc = " Specifies BT.601 colorspace - YUV ER 4:2:2 planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_YVYU_ER: NvBufSurfaceColorFormat = 17;
+#[doc = " Specifies BT.601 colorspace - YUV444 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_YUV444: NvBufSurfaceColorFormat = 18;
+#[doc = " Specifies RGBA-8-8-8-8 single plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_RGBA: NvBufSurfaceColorFormat = 19;
+#[doc = " Specifies BGRA-8-8-8-8 single plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_BGRA: NvBufSurfaceColorFormat = 20;
+#[doc = " Specifies ARGB-8-8-8-8 single plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_ARGB: NvBufSurfaceColorFormat = 21;
+#[doc = " Specifies ABGR-8-8-8-8 single plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_ABGR: NvBufSurfaceColorFormat = 22;
+#[doc = " Specifies RGBx-8-8-8-8 single plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_RGBx: NvBufSurfaceColorFormat = 23;
+#[doc = " Specifies BGRx-8-8-8-8 single plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_BGRx: NvBufSurfaceColorFormat = 24;
+#[doc = " Specifies xRGB-8-8-8-8 single plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_xRGB: NvBufSurfaceColorFormat = 25;
+#[doc = " Specifies xBGR-8-8-8-8 single plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_xBGR: NvBufSurfaceColorFormat = 26;
+#[doc = " Specifies RGB-8-8-8 single plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_RGB: NvBufSurfaceColorFormat = 27;
+#[doc = " Specifies BGR-8-8-8 single plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_BGR: NvBufSurfaceColorFormat = 28;
+#[doc = " Specifies BT.601 colorspace - Y/CbCr 4:2:0 10-bit multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV12_10LE: NvBufSurfaceColorFormat = 29;
+#[doc = " Specifies BT.601 colorspace - Y/CbCr 4:2:0 12-bit multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV12_12LE: NvBufSurfaceColorFormat = 30;
+#[doc = " Specifies BT.709 colorspace - YUV420 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_YUV420_709: NvBufSurfaceColorFormat = 31;
+#[doc = " Specifies BT.709 colorspace - YUV420 ER multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_YUV420_709_ER: NvBufSurfaceColorFormat = 32;
+#[doc = " Specifies BT.709 colorspace - Y/CbCr 4:2:0 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV12_709: NvBufSurfaceColorFormat = 33;
+#[doc = " Specifies BT.709 colorspace - Y/CbCr ER 4:2:0 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV12_709_ER: NvBufSurfaceColorFormat = 34;
+#[doc = " Specifies BT.2020 colorspace - YUV420 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_YUV420_2020: NvBufSurfaceColorFormat = 35;
+#[doc = " Specifies BT.2020 colorspace - Y/CbCr 4:2:0 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV12_2020: NvBufSurfaceColorFormat = 36;
+#[doc = " Specifies BT.601 colorspace - Y/CbCr ER 4:2:0 10-bit multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV12_10LE_ER: NvBufSurfaceColorFormat = 37;
+#[doc = " Specifies BT.709 colorspace - Y/CbCr 4:2:0 10-bit multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV12_10LE_709: NvBufSurfaceColorFormat = 38;
+#[doc = " Specifies BT.709 colorspace - Y/CbCr ER 4:2:0 10-bit multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV12_10LE_709_ER: NvBufSurfaceColorFormat = 39;
+#[doc = " Specifies BT.2020 colorspace - Y/CbCr 4:2:0 10-bit multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV12_10LE_2020: NvBufSurfaceColorFormat = 40;
+#[doc = " Specifies color format for packed 2 signed shorts"]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_SIGNED_R16G16: NvBufSurfaceColorFormat = 41;
+#[doc = " Specifies RGB- unsigned 8 bit multiplanar plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_R8_G8_B8: NvBufSurfaceColorFormat = 42;
+#[doc = " Specifies BGR- unsigned 8 bit multiplanar plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_B8_G8_R8: NvBufSurfaceColorFormat = 43;
+#[doc = " Specifies RGB-32bit Floating point multiplanar plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_R32F_G32F_B32F: NvBufSurfaceColorFormat = 44;
+#[doc = " Specifies BGR-32bit Floating point multiplanar plane."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_B32F_G32F_R32F: NvBufSurfaceColorFormat = 45;
+#[doc = " Specifies BT.601 colorspace - YUV422 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_YUV422: NvBufSurfaceColorFormat = 46;
+#[doc = " Specifies BT.601 colorspace - Y/CrCb 4:2:0 10-bit multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV21_10LE: NvBufSurfaceColorFormat = 47;
+#[doc = " Specifies BT.601 colorspace - Y/CrCb 4:2:0 12-bit multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV21_12LE: NvBufSurfaceColorFormat = 48;
+#[doc = " Specifies BT.2020 colorspace - Y/CbCr 4:2:0 12-bit multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV12_12LE_2020: NvBufSurfaceColorFormat = 49;
+#[doc = " Specifies BT.601 colorspace - Y/CbCr 4:2:2 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV16: NvBufSurfaceColorFormat = 50;
+#[doc = " Specifies BT.601 colorspace - Y/CbCr 4:2:2 10-bit semi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV16_10LE: NvBufSurfaceColorFormat = 51;
+#[doc = " Specifies BT.601 colorspace - Y/CbCr 4:4:4 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV24: NvBufSurfaceColorFormat = 52;
+#[doc = " Specifies BT.601 colorspace - Y/CrCb 4:4:4 10-bit multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV24_10LE: NvBufSurfaceColorFormat = 53;
+#[doc = " Specifies BT.601_ER colorspace - Y/CbCr 4:2:2 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV16_ER: NvBufSurfaceColorFormat = 54;
+#[doc = " Specifies BT.601_ER colorspace - Y/CbCr 4:4:4 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV24_ER: NvBufSurfaceColorFormat = 55;
+#[doc = " Specifies BT.709 colorspace - Y/CbCr 4:2:2 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV16_709: NvBufSurfaceColorFormat = 56;
+#[doc = " Specifies BT.709 colorspace - Y/CbCr 4:4:4 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV24_709: NvBufSurfaceColorFormat = 57;
+#[doc = " Specifies BT.709_ER colorspace - Y/CbCr 4:2:2 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV16_709_ER: NvBufSurfaceColorFormat = 58;
+#[doc = " Specifies BT.709_ER colorspace - Y/CbCr 4:4:4 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV24_709_ER: NvBufSurfaceColorFormat = 59;
+#[doc = " Specifies BT.709 colorspace - Y/CbCr 10 bit 4:4:4 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV24_10LE_709: NvBufSurfaceColorFormat = 60;
+#[doc = " Specifies BT.709 ER colorspace - Y/CbCr 10 bit 4:4:4 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV24_10LE_709_ER: NvBufSurfaceColorFormat = 61;
+#[doc = " Specifies BT.2020 colorspace - Y/CbCr 10 bit 4:4:4 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV24_10LE_2020: NvBufSurfaceColorFormat = 62;
+#[doc = " Specifies BT.2020 colorspace - Y/CbCr 12 bit 4:4:4 multi-planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_NV24_12LE_2020: NvBufSurfaceColorFormat = 63;
+#[doc = " Specifies Non-linear RGB BT.709 colorspace - RGBA-10-10-10-2 planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_RGBA_10_10_10_2_709: NvBufSurfaceColorFormat =
+    64;
+#[doc = " Specifies Non-linear RGB BT.2020 colorspace - RGBA-10-10-10-2 planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_RGBA_10_10_10_2_2020: NvBufSurfaceColorFormat =
+    65;
+#[doc = " Specifies Non-linear RGB BT.709 colorspace - BGRA-10-10-10-2 planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_BGRA_10_10_10_2_709: NvBufSurfaceColorFormat =
+    66;
+#[doc = " Specifies Non-linear RGB BT.2020 colorspace - BGRA-10-10-10-2 planar."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_BGRA_10_10_10_2_2020: NvBufSurfaceColorFormat =
+    67;
+#[doc = " Specifies Optical flow SAD calculation Buffer format"]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_A32: NvBufSurfaceColorFormat = 68;
+#[doc = " Specifies BT.601 colorspace - 10 bit YUV 4:2:2 interleaved."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_UYVP: NvBufSurfaceColorFormat = 69;
+#[doc = " Specifies BT.601 colorspace - 10 bit YUV ER 4:2:2 interleaved."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_UYVP_ER: NvBufSurfaceColorFormat = 70;
+#[doc = " Specifies BT.601 colorspace - 10 bit YUV ER 4:2:2 interleaved."]
+pub const NvBufSurfaceColorFormat_NVBUF_COLOR_FORMAT_LAST: NvBufSurfaceColorFormat = 71;
+#[doc = " Defines color formats for NvBufSurface."]
+pub type NvBufSurfaceColorFormat = ::std::os::raw::c_uint;
+#[doc = " Specifies pitch layout."]
+pub const NvBufSurfaceLayout_NVBUF_LAYOUT_PITCH: NvBufSurfaceLayout = 0;
+#[doc = " Specifies block linear layout."]
+pub const NvBufSurfaceLayout_NVBUF_LAYOUT_BLOCK_LINEAR: NvBufSurfaceLayout = 1;
+#[doc = " Specifies layout formats for \\ref NvBufSurface video planes."]
+pub type NvBufSurfaceLayout = ::std::os::raw::c_uint;
+#[doc = " Progessive scan formats."]
+pub const NvBufSurfaceDisplayScanFormat_NVBUF_DISPLAYSCANFORMAT_PROGRESSIVE:
+    NvBufSurfaceDisplayScanFormat = 0;
+#[doc = " Interlaced scan formats."]
+pub const NvBufSurfaceDisplayScanFormat_NVBUF_DISPLAYSCANFORMAT_INTERLACED:
+    NvBufSurfaceDisplayScanFormat = 1;
+#[doc = " Defines display scan formats for NvBufSurface video planes."]
+pub type NvBufSurfaceDisplayScanFormat = ::std::os::raw::c_uint;
+#[doc = " Holds plane wise parameters(extended) of a buffer."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvBufSurfacePlaneParamsEx {
+    #[doc = " display scan format - progressive/interlaced."]
+    pub scanformat: [NvBufSurfaceDisplayScanFormat; 4usize],
+    #[doc = " offset of the second field for interlaced buffer."]
+    pub secondfieldoffset: [u32; 4usize],
+    #[doc = " block height of the planes for blockLinear layout buffer."]
+    pub blockheightlog2: [u32; 4usize],
+    #[doc = " physical address of allocated planes."]
+    pub physicaladdress: [u32; 4usize],
+    #[doc = " flags associated with planes"]
+    pub flags: [u64; 4usize],
+    pub _reserved: [*mut ::std::os::raw::c_void; 16usize],
+}
+#[test]
+fn bindgen_test_layout_NvBufSurfacePlaneParamsEx() {
+    assert_eq!(
+        ::std::mem::size_of::<NvBufSurfacePlaneParamsEx>(),
+        224usize,
+        concat!("Size of: ", stringify!(NvBufSurfacePlaneParamsEx))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvBufSurfacePlaneParamsEx>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvBufSurfacePlaneParamsEx))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfacePlaneParamsEx>())).scanformat as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParamsEx),
+            "::",
+            stringify!(scanformat)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfacePlaneParamsEx>())).secondfieldoffset as *const _
+                as usize
+        },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParamsEx),
+            "::",
+            stringify!(secondfieldoffset)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfacePlaneParamsEx>())).blockheightlog2 as *const _
+                as usize
+        },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParamsEx),
+            "::",
+            stringify!(blockheightlog2)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfacePlaneParamsEx>())).physicaladdress as *const _
+                as usize
+        },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParamsEx),
+            "::",
+            stringify!(physicaladdress)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfacePlaneParamsEx>())).flags as *const _ as usize },
+        64usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParamsEx),
+            "::",
+            stringify!(flags)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfacePlaneParamsEx>()))._reserved as *const _ as usize
+        },
+        96usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParamsEx),
+            "::",
+            stringify!(_reserved)
+        )
+    );
+}
+#[doc = " Holds plane wise parameters of a buffer."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvBufSurfacePlaneParams {
+    #[doc = " Holds the number of planes."]
+    pub num_planes: u32,
+    #[doc = " Holds the widths of planes."]
+    pub width: [u32; 4usize],
+    #[doc = " Holds the heights of planes."]
+    pub height: [u32; 4usize],
+    #[doc = " Holds the pitches of planes in bytes."]
+    pub pitch: [u32; 4usize],
+    #[doc = " Holds the offsets of planes in bytes."]
+    pub offset: [u32; 4usize],
+    #[doc = " Holds the sizes of planes in bytes."]
+    pub psize: [u32; 4usize],
+    #[doc = " Holds the number of bytes occupied by a pixel in each plane."]
+    pub bytesPerPix: [u32; 4usize],
+    pub _reserved: [*mut ::std::os::raw::c_void; 16usize],
+}
+#[test]
+fn bindgen_test_layout_NvBufSurfacePlaneParams() {
+    assert_eq!(
+        ::std::mem::size_of::<NvBufSurfacePlaneParams>(),
+        232usize,
+        concat!("Size of: ", stringify!(NvBufSurfacePlaneParams))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvBufSurfacePlaneParams>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvBufSurfacePlaneParams))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfacePlaneParams>())).num_planes as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParams),
+            "::",
+            stringify!(num_planes)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfacePlaneParams>())).width as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParams),
+            "::",
+            stringify!(width)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfacePlaneParams>())).height as *const _ as usize },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParams),
+            "::",
+            stringify!(height)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfacePlaneParams>())).pitch as *const _ as usize },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParams),
+            "::",
+            stringify!(pitch)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfacePlaneParams>())).offset as *const _ as usize },
+        52usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParams),
+            "::",
+            stringify!(offset)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfacePlaneParams>())).psize as *const _ as usize },
+        68usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParams),
+            "::",
+            stringify!(psize)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfacePlaneParams>())).bytesPerPix as *const _ as usize
+        },
+        84usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParams),
+            "::",
+            stringify!(bytesPerPix)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfacePlaneParams>()))._reserved as *const _ as usize
+        },
+        104usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfacePlaneParams),
+            "::",
+            stringify!(_reserved)
+        )
+    );
+}
+#[doc = " Holds Chroma Subsampling parameters for NvBufSurface allocation."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvBufSurfaceChromaSubsamplingParams {
+    #[doc = " location settings"]
+    pub chromaLocHoriz: u8,
+    pub chromaLocVert: u8,
+}
+#[test]
+fn bindgen_test_layout_NvBufSurfaceChromaSubsamplingParams() {
+    assert_eq!(
+        ::std::mem::size_of::<NvBufSurfaceChromaSubsamplingParams>(),
+        2usize,
+        concat!("Size of: ", stringify!(NvBufSurfaceChromaSubsamplingParams))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvBufSurfaceChromaSubsamplingParams>(),
+        1usize,
+        concat!(
+            "Alignment of ",
+            stringify!(NvBufSurfaceChromaSubsamplingParams)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceChromaSubsamplingParams>())).chromaLocHoriz
+                as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceChromaSubsamplingParams),
+            "::",
+            stringify!(chromaLocHoriz)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceChromaSubsamplingParams>())).chromaLocVert
+                as *const _ as usize
+        },
+        1usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceChromaSubsamplingParams),
+            "::",
+            stringify!(chromaLocVert)
+        )
+    );
+}
+#[doc = " Hold the pointers of mapped buffer."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvBufSurfaceMappedAddr {
+    #[doc = " Holds planewise pointers to a CPU mapped buffer."]
+    pub addr: [*mut ::std::os::raw::c_void; 4usize],
+    #[doc = " Holds a pointer to a mapped EGLImage."]
+    pub eglImage: *mut ::std::os::raw::c_void,
+    pub _reserved: [*mut ::std::os::raw::c_void; 4usize],
+}
+#[test]
+fn bindgen_test_layout_NvBufSurfaceMappedAddr() {
+    assert_eq!(
+        ::std::mem::size_of::<NvBufSurfaceMappedAddr>(),
+        72usize,
+        concat!("Size of: ", stringify!(NvBufSurfaceMappedAddr))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvBufSurfaceMappedAddr>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvBufSurfaceMappedAddr))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceMappedAddr>())).addr as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceMappedAddr),
+            "::",
+            stringify!(addr)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceMappedAddr>())).eglImage as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceMappedAddr),
+            "::",
+            stringify!(eglImage)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceMappedAddr>()))._reserved as *const _ as usize
+        },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceMappedAddr),
+            "::",
+            stringify!(_reserved)
+        )
+    );
+}
+#[doc = " Hold the information(extended) of single buffer in the batch."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvBufSurfaceParamsEx {
+    #[doc = " offset in bytes from the start of the buffer to the first valid byte."]
+    #[doc = "(Applicable for NVBUF_MEM_HANDLE)"]
+    pub startofvaliddata: i32,
+    #[doc = " size of the valid data from the first to the last valid byte."]
+    #[doc = "(Applicable for NVBUF_MEM_HANDLE)"]
+    pub sizeofvaliddatainbytes: i32,
+    #[doc = " chroma subsampling parameters."]
+    #[doc = "(Applicable for NVBUF_MEM_SURFACE_ARRAY)"]
+    pub chromaSubsampling: NvBufSurfaceChromaSubsamplingParams,
+    #[doc = " get buffer vpr information."]
+    pub is_protected: bool,
+    #[doc = " plane wise extended info"]
+    pub planeParamsex: NvBufSurfacePlaneParamsEx,
+    pub _reserved: [*mut ::std::os::raw::c_void; 4usize],
+}
+#[test]
+fn bindgen_test_layout_NvBufSurfaceParamsEx() {
+    assert_eq!(
+        ::std::mem::size_of::<NvBufSurfaceParamsEx>(),
+        272usize,
+        concat!("Size of: ", stringify!(NvBufSurfaceParamsEx))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvBufSurfaceParamsEx>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvBufSurfaceParamsEx))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceParamsEx>())).startofvaliddata as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParamsEx),
+            "::",
+            stringify!(startofvaliddata)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceParamsEx>())).sizeofvaliddatainbytes as *const _
+                as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParamsEx),
+            "::",
+            stringify!(sizeofvaliddatainbytes)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceParamsEx>())).chromaSubsampling as *const _ as usize
+        },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParamsEx),
+            "::",
+            stringify!(chromaSubsampling)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceParamsEx>())).is_protected as *const _ as usize
+        },
+        10usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParamsEx),
+            "::",
+            stringify!(is_protected)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvBufSurfaceParamsEx>())).planeParamsex as *const _ as usize
+        },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParamsEx),
+            "::",
+            stringify!(planeParamsex)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceParamsEx>()))._reserved as *const _ as usize },
+        240usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParamsEx),
+            "::",
+            stringify!(_reserved)
+        )
+    );
+}
+#[doc = " Hold the information of single buffer in the batch."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct NvBufSurfaceParams {
+    #[doc = " Holds the width of the buffer."]
+    pub width: u32,
+    #[doc = " Holds the height of the buffer."]
+    pub height: u32,
+    #[doc = " Holds the pitch of the buffer."]
+    pub pitch: u32,
+    #[doc = " Holds the color format of the buffer."]
+    pub colorFormat: NvBufSurfaceColorFormat,
+    #[doc = " Holds BL or PL. For dGPU, only PL is valid."]
+    pub layout: NvBufSurfaceLayout,
+    #[doc = " Holds a DMABUF FD. Valid only for \\ref NVBUF_MEM_SURFACE_ARRAY and"]
+    #[doc = "\\ref NVBUF_MEM_HANDLE type memory."]
+    pub bufferDesc: u64,
+    #[doc = " Holds the amount of allocated memory."]
+    pub dataSize: u32,
+    #[doc = " Holds a pointer to allocated memory. Not valid for"]
+    #[doc = "\\ref NVBUF_MEM_SURFACE_ARRAY or \\ref NVBUF_MEM_HANDLE."]
+    pub dataPtr: *mut ::std::os::raw::c_void,
+    #[doc = " Holds planewise information (width, height, pitch, offset, etc.)."]
+    pub planeParams: NvBufSurfacePlaneParams,
+    #[doc = " Holds pointers to mapped buffers. Initialized to NULL"]
+    #[doc = "when the structure is created."]
+    pub mappedAddr: NvBufSurfaceMappedAddr,
+    #[doc = " pointers of extended parameters of single buffer in the batch."]
+    pub paramex: *mut NvBufSurfaceParamsEx,
+    pub _reserved: [*mut ::std::os::raw::c_void; 3usize],
+}
+#[test]
+fn bindgen_test_layout_NvBufSurfaceParams() {
+    assert_eq!(
+        ::std::mem::size_of::<NvBufSurfaceParams>(),
+        384usize,
+        concat!("Size of: ", stringify!(NvBufSurfaceParams))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<NvBufSurfaceParams>(),
+        8usize,
+        concat!("Alignment of ", stringify!(NvBufSurfaceParams))
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceParams>())).width as *const _ as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParams),
+            "::",
+            stringify!(width)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceParams>())).height as *const _ as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParams),
+            "::",
+            stringify!(height)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceParams>())).pitch as *const _ as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParams),
+            "::",
+            stringify!(pitch)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceParams>())).colorFormat as *const _ as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParams),
+            "::",
+            stringify!(colorFormat)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceParams>())).layout as *const _ as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParams),
+            "::",
+            stringify!(layout)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceParams>())).bufferDesc as *const _ as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParams),
+            "::",
+            stringify!(bufferDesc)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceParams>())).dataSize as *const _ as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParams),
+            "::",
+            stringify!(dataSize)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceParams>())).dataPtr as *const _ as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParams),
+            "::",
+            stringify!(dataPtr)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceParams>())).planeParams as *const _ as usize },
+        48usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParams),
+            "::",
+            stringify!(planeParams)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceParams>())).mappedAddr as *const _ as usize },
+        280usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParams),
+            "::",
+            stringify!(mappedAddr)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceParams>())).paramex as *const _ as usize },
+        352usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParams),
+            "::",
+            stringify!(paramex)
+        )
+    );
+    assert_eq!(
+        unsafe { &(*(::std::ptr::null::<NvBufSurfaceParams>()))._reserved as *const _ as usize },
+        360usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvBufSurfaceParams),
+            "::",
+            stringify!(_reserved)
+        )
+    );
+}
 #[doc = " Holds the raw tensor output information for one frame / one object."]
 #[doc = ""]
 #[doc = " The \"nvinfer\" plugins adds this meta when the \"output-tensor-meta\" property"]
@@ -5920,6 +6746,8 @@ pub struct NvDsInferTensorMeta {
     pub priv_data: *mut ::std::os::raw::c_void,
     #[doc = " Network information for the model specified for the nvinfer element instance."]
     pub network_info: NvDsInferNetworkInfo,
+    #[doc = " Whether aspect ratio was maintained while scaling to network resolution"]
+    pub maintain_aspect_ratio: gboolean,
 }
 #[test]
 fn bindgen_test_layout_NvDsInferTensorMeta() {
@@ -6021,6 +6849,19 @@ fn bindgen_test_layout_NvDsInferTensorMeta() {
             stringify!(NvDsInferTensorMeta),
             "::",
             stringify!(network_info)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<NvDsInferTensorMeta>())).maintain_aspect_ratio as *const _
+                as usize
+        },
+        60usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(NvDsInferTensorMeta),
+            "::",
+            stringify!(maintain_aspect_ratio)
         )
     );
 }
