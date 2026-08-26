@@ -144,17 +144,81 @@ pub const NVBUF_MAX_PLANES: u32 = 4;
 pub const NVBUFSURFACE_CHROMA_SUBSAMPLING_HORIZ_DEFAULT: u32 = 0;
 pub const NVBUFSURFACE_CHROMA_SUBSAMPLING_VERT_DEFAULT: u32 = 1;
 pub const NVBUFSURF_MAX_SYNCOBJ: u32 = 5;
+pub const V4L2_CID_MPEG_VIDEO_H265_PROFILE: u32 = 10029825;
+pub const V4L2_CID_MPEG_VIDEO_IDR_INTERVAL: u32 = 10029826;
 pub const V4L2_CID_MPEG_VIDEO_DISABLE_COMPLETE_FRAME_INPUT: u32 = 10029827;
 pub const V4L2_CID_MPEG_VIDEO_SKIP_FRAMES: u32 = 10029830;
 pub const V4L2_CID_MPEG_VIDEODEC_METADATA: u32 = 10029831;
 pub const V4L2_CID_MPEG_VIDEODEC_INPUT_METADATA: u32 = 10029832;
 pub const V4L2_CID_MPEG_VIDEODEC_SAR_WIDTH: u32 = 10029892;
 pub const V4L2_CID_MPEG_VIDEODEC_SAR_HEIGHT: u32 = 10029893;
+pub const V4L2_CID_MPEG_VIDEOENC_DS_SEI_DATA: u32 = 10029883;
 pub const V4L2_CID_MPEG_VIDEODEC_GDR_STREAM: u32 = 10029903;
+pub const V4L2_CID_MPEG_VIDEOENC_DS_SEI_UUID: u32 = 10029906;
 pub const V4L2_CID_MPEG_VIDEODEC_OPERATING_POINT: u32 = 10029907;
 pub const V4L2_CID_MPEG_VIDEODEC_ENABLE_MVC: u32 = 10029908;
 pub const V4L2_CID_MPEG_VIDEODEC_NUM_OPERATING_POINTS: u32 = 10029909;
+pub const V4L2_CID_MPEG_VIDEOENC_TEMPORAL_TRADEOFF_LEVEL: u32 = 10029840;
+pub const V4L2_CID_MPEG_VIDEOENC_SLICE_LENGTH_PARAM: u32 = 10029841;
+pub const V4L2_CID_MPEG_VIDEOENC_ROI_PARAMS: u32 = 10029842;
+pub const V4L2_CID_MPEG_VIDEOENC_VIRTUALBUFFER_SIZE: u32 = 10029843;
+pub const V4L2_CID_MPEG_VIDEOENC_NUM_REFERENCE_FRAMES: u32 = 10029844;
+pub const V4L2_CID_MPEG_VIDEOENC_SLICE_INTRAREFRESH_PARAM: u32 = 10029845;
+pub const V4L2_CID_MPEG_VIDEOENC_NUM_BFRAMES: u32 = 10029846;
+pub const V4L2_CID_MPEG_VIDEOENC_INSERT_SPS_PPS_AT_IDR: u32 = 10029847;
+pub const V4L2_CID_MPEG_VIDEOENC_METADATA: u32 = 10029848;
+pub const V4L2_CID_MPEG_VIDEOENC_ENABLE_METADATA_MV: u32 = 10029849;
+pub const V4L2_CID_MPEG_VIDEOENC_METADATA_MV: u32 = 10029850;
+pub const V4L2_CID_MPEG_VIDEOENC_QP_RANGE: u32 = 10029851;
+pub const V4L2_CID_MPEG_VIDEOENC_HW_PRESET_TYPE_PARAM: u32 = 10029852;
+pub const V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA: u32 = 10029853;
+pub const V4L2_CID_MPEG_VIDEOENC_ENABLE_EXTERNAL_RPS_CONTROL: u32 = 10029854;
+pub const V4L2_CID_MPEG_VIDEOENC_ENABLE_EXTERNAL_RATE_CONTROL: u32 = 10029855;
+pub const V4L2_CID_MPEG_VIDEOENC_ENABLE_ROI_PARAM: u32 = 10029856;
+pub const V4L2_CID_MPEG_VIDEOENC_ENABLE_RECONCRC_PARAM: u32 = 10029857;
+pub const V4L2_CID_MPEG_VIDEOENC_INSERT_VUI: u32 = 10029858;
+pub const V4L2_CID_MPEG_VIDEOENC_INSERT_AUD: u32 = 10029859;
+pub const V4L2_CID_MPEG_VIDEOENC_EXTEDED_COLORFORMAT: u32 = 10029860;
+pub const V4L2_CID_MPEG_VIDEOENC_TWO_PASS_CBR: u32 = 10029864;
+pub const V4L2_CID_MPEG_VIDEO_MAX_PERFORMANCE: u32 = 10029866;
+pub const V4L2_CID_MPEG_VIDEOENC_ENABLE_ALLIFRAME_ENCODE: u32 = 10029867;
 pub const V4L2_CID_MPEG_VIDEODEC_DROP_FRAME_INTERVAL: u32 = 10029871;
+pub const V4L2_CID_MPEG_VIDEOENC_VPX_HEADERS_WITH_FRAME: u32 = 10029872;
+pub const V4L2_CID_MPEG_VIDEOENC_H265_LEVEL: u32 = 10029873;
+pub const V4L2_CID_MPEG_VIDEOENC_ENABLE_SLICE_LEVEL_ENCODE: u32 = 10029874;
+pub const V4L2_CID_MPEG_VIDEOENC_POC_TYPE: u32 = 10029875;
+pub const V4L2_CID_MPEG_VIDEOENC_H265_VUI_EXT_SAR_WIDTH: u32 = 10029876;
+pub const V4L2_CID_MPEG_VIDEOENC_H265_VUI_EXT_SAR_HEIGHT: u32 = 10029877;
+pub const V4L2_CID_MPEG_VIDEOENC_FORCE_INTRA_FRAME: u32 = 10029878;
+pub const V4L2_CID_MPEG_VIDEOENC_FORCE_IDR_FRAME: u32 = 10029879;
+pub const V4L2_CID_MPEG_VIDEOENC_AV1_HEADERS_WITH_FRAME: u32 = 10029881;
+pub const V4L2_CID_MPEG_VIDEOENC_AV1_TILE_CONFIGURATION: u32 = 10029882;
+pub const V4L2_CID_MPEG_VIDEOENC_AV1_ENABLE_SSIMRDO: u32 = 10029883;
+pub const V4L2_CID_MPEG_VIDEOENC_AV1_DISABLE_CDF_UPDATE: u32 = 10029884;
+pub const V4L2_CID_MPEG_VIDEOENC_FRAMES_TO_ENCODE: u32 = 10029885;
+pub const V4L2_CID_MPEG_VIDEOENC_INIT_FRAME_QP: u32 = 10029886;
+pub const V4L2_CID_MPEG_VIDEOENC_ENABLE_LOSSLESS: u32 = 10029887;
+pub const V4L2_CID_MPEG_VIDEOENC_H265_CHROMA_FACTOR_IDC: u32 = 10029888;
+pub const V4L2_CID_MPEG_VIDEOENC_PPE_INIT_PARAMS: u32 = 10029889;
+pub const V4L2_CID_MPEG_VIDEOENC_CUDA_PRESET_ID: u32 = 10029890;
+pub const V4L2_CID_MPEG_VIDEOENC_CUDA_TUNING_INFO: u32 = 10029891;
+pub const V4L2_CID_MPEG_VIDEOENC_CUDA_CONSTQP: u32 = 10029892;
+pub const V4L2_CID_MPEG_VIDEOENC_H265_DISABLE_AMP: u32 = 10029893;
+pub const V4L2_CID_MPEG_VIDEOENC_RECONFIG_FPS: u32 = 10029894;
+pub const V4L2_CID_MPEG_VIDEO_MAXBITRATE: u32 = 10029895;
+pub const V4L2_CID_MPEG_VIDEOENC_VBVBUFSIZE: u32 = 10029896;
+pub const V4L2_CID_MPEG_VIDEOENC_VBVINIT: u32 = 10029897;
+pub const V4L2_CID_MPEG_VIDEOENC_ENABLE_AQ: u32 = 10029898;
+pub const V4L2_CID_MPEG_VIDEOENC_ENABLE_TEMPORAL_AQ: u32 = 10029899;
+pub const V4L2_CID_MPEG_VIDEOENC_TARGET_QUALITY: u32 = 10029900;
+pub const V4L2_CID_MPEG_VIDEOENC_COPY_TIMESTAMP: u32 = 10029901;
+pub const V4L2_CID_MPEG_VIDEOENC_INTRA_REFRESH: u32 = 10029902;
+pub const V4L2_CID_MPEG_VIDEOENC_AV1_ERR_RESILIENT_MODE: u32 = 10029904;
+pub const V4L2_CID_MPEG_VIDEOENC_AV1_ENABLE_FRAMEID_NUMBERS: u32 = 10029905;
+pub const V4L2_CID_MPEG_VIDEOENC_AV1_ENABLE_TILE_GROUPS: u32 = 10029910;
+pub const V4L2_MPEG_VIDEO_BITRATE_MODE_CONSTQP: u32 = 2;
+pub const V4L2_MAX_ROI_REGIONS: u32 = 8;
+pub const V4L2_MAX_REF_FRAMES: u32 = 8;
 #[doc = "< Specifies \\ref NvBufSurface mapping type \"read.\""]
 pub const NvBufSurfaceMemMapFlags_NVBUF_MAP_READ: NvBufSurfaceMemMapFlags = 0;
 #[doc = "< Specifies \\ref NvBufSurface mapping type\n\"write.\""]
@@ -1395,6 +1459,24 @@ pub type __u8 = ::std::os::raw::c_uchar;
 pub type __u16 = ::std::os::raw::c_ushort;
 pub type __s32 = ::std::os::raw::c_int;
 pub type __u32 = ::std::os::raw::c_uint;
+pub type __u64 = ::std::os::raw::c_ulonglong;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_rect {
+    pub left: __s32,
+    pub top: __s32,
+    pub width: __u32,
+    pub height: __u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_rect"][::std::mem::size_of::<v4l2_rect>() - 16usize];
+    ["Alignment of v4l2_rect"][::std::mem::align_of::<v4l2_rect>() - 4usize];
+    ["Offset of field: v4l2_rect::left"][::std::mem::offset_of!(v4l2_rect, left) - 0usize];
+    ["Offset of field: v4l2_rect::top"][::std::mem::offset_of!(v4l2_rect, top) - 4usize];
+    ["Offset of field: v4l2_rect::width"][::std::mem::offset_of!(v4l2_rect, width) - 8usize];
+    ["Offset of field: v4l2_rect::height"][::std::mem::offset_of!(v4l2_rect, height) - 12usize];
+};
 #[doc = " Do not skip any frame."]
 pub const v4l2_skip_frames_type_V4L2_SKIP_FRAMES_TYPE_NONE: v4l2_skip_frames_type = 0;
 #[doc = " Skip all non-reference frames."]
@@ -1839,6 +1921,373 @@ const _: () = {
 };
 #[doc = " Holds the video decoder output metadata for a frame."]
 pub type v4l2_ctrl_videodec_outputbuf_metadata = v4l2_ctrl_videodec_outputbuf_metadata_;
+#[doc = " H.265 Main profile."]
+pub const v4l2_mpeg_video_h265_profile_V4L2_MPEG_VIDEO_H265_PROFILE_MAIN:
+    v4l2_mpeg_video_h265_profile = 0;
+#[doc = " H.265 Main10 profile."]
+pub const v4l2_mpeg_video_h265_profile_V4L2_MPEG_VIDEO_H265_PROFILE_MAIN10:
+    v4l2_mpeg_video_h265_profile = 1;
+#[doc = " H.265 MainStillPicture profile."]
+pub const v4l2_mpeg_video_h265_profile_V4L2_MPEG_VIDEO_H265_PROFILE_MAINSTILLPICTURE:
+    v4l2_mpeg_video_h265_profile = 2;
+#[doc = " H.265 FREXT profile."]
+pub const v4l2_mpeg_video_h265_profile_V4L2_MPEG_VIDEO_H265_PROFILE_FREXT:
+    v4l2_mpeg_video_h265_profile = 3;
+#[doc = " H.265 FREXT profile."]
+pub const v4l2_mpeg_video_h265_profile_V4L2_MPEG_VIDEO_H265_FORCE32: v4l2_mpeg_video_h265_profile =
+    2147483647;
+#[doc = " Defines the possible profiles for H.265 encoder."]
+pub type v4l2_mpeg_video_h265_profile = ::std::os::raw::c_uint;
+#[doc = " Do not drop any buffers."]
+pub const v4l2_enc_temporal_tradeoff_level_type_V4L2_ENC_TEMPORAL_TRADEOFF_LEVEL_DROPNONE:
+    v4l2_enc_temporal_tradeoff_level_type = 0;
+#[doc = " Drop 1 in every 5 buffers."]
+pub const v4l2_enc_temporal_tradeoff_level_type_V4L2_ENC_TEMPORAL_TRADEOFF_LEVEL_DROP1IN5:
+    v4l2_enc_temporal_tradeoff_level_type = 1;
+#[doc = " Drop 1 in every 3 buffers."]
+pub const v4l2_enc_temporal_tradeoff_level_type_V4L2_ENC_TEMPORAL_TRADEOFF_LEVEL_DROP1IN3:
+    v4l2_enc_temporal_tradeoff_level_type = 2;
+#[doc = " Drop 1 in every 2 buffers."]
+pub const v4l2_enc_temporal_tradeoff_level_type_V4L2_ENC_TEMPORAL_TRADEOFF_LEVEL_DROP1IN2:
+    v4l2_enc_temporal_tradeoff_level_type = 3;
+#[doc = " Drop 2 in every 3 buffers."]
+pub const v4l2_enc_temporal_tradeoff_level_type_V4L2_ENC_TEMPORAL_TRADEOFF_LEVEL_DROP2IN3:
+    v4l2_enc_temporal_tradeoff_level_type = 4;
+#[doc = " Specifies the types of encoder temporal tradeoff levels"]
+pub type v4l2_enc_temporal_tradeoff_level_type = ::std::os::raw::c_uint;
+#[doc = " Encoder HWPreset DISABLED."]
+pub const v4l2_enc_hw_preset_type_V4L2_ENC_HW_PRESET_DISABLE: v4l2_enc_hw_preset_type = 0;
+#[doc = " Encoder HWPreset with per frame encode time UltraFast."]
+pub const v4l2_enc_hw_preset_type_V4L2_ENC_HW_PRESET_ULTRAFAST: v4l2_enc_hw_preset_type = 1;
+#[doc = " Encoder HWPreset with per frame encode time Fast."]
+pub const v4l2_enc_hw_preset_type_V4L2_ENC_HW_PRESET_FAST: v4l2_enc_hw_preset_type = 2;
+#[doc = " Encoder HWPreset with per frame encode time Medium."]
+pub const v4l2_enc_hw_preset_type_V4L2_ENC_HW_PRESET_MEDIUM: v4l2_enc_hw_preset_type = 3;
+#[doc = " Encoder HWPreset with per frame encode time Slow."]
+pub const v4l2_enc_hw_preset_type_V4L2_ENC_HW_PRESET_SLOW: v4l2_enc_hw_preset_type = 4;
+#[doc = " Last value is Max value."]
+pub const v4l2_enc_hw_preset_type_V4L2_ENC_HW_PRESET_DEFAULT: v4l2_enc_hw_preset_type = 2147483647;
+#[doc = " Specifies the encoder HW Preset type."]
+pub type v4l2_enc_hw_preset_type = ::std::os::raw::c_uint;
+#[doc = " Encoder Tuning Info Undefined"]
+pub const v4l2_enc_hw_tuning_info_type_V4L2_ENC_TUNING_INFO_UNDEFINED:
+    v4l2_enc_hw_tuning_info_type = 0;
+#[doc = " Encoder Tuning Info High Quality"]
+pub const v4l2_enc_hw_tuning_info_type_V4L2_ENC_TUNING_INFO_HIGH_QUALITY:
+    v4l2_enc_hw_tuning_info_type = 1;
+#[doc = " Encoder Tuning Info Low Latency"]
+pub const v4l2_enc_hw_tuning_info_type_V4L2_ENC_TUNING_INFO_LOW_LATENCY:
+    v4l2_enc_hw_tuning_info_type = 2;
+#[doc = " Encoder Tuning Info Ultra Low Latency"]
+pub const v4l2_enc_hw_tuning_info_type_V4L2_ENC_TUNING_INFO_ULTRA_LOW_LATENCY:
+    v4l2_enc_hw_tuning_info_type = 3;
+#[doc = " Encoder Tuning Info Lossless"]
+pub const v4l2_enc_hw_tuning_info_type_V4L2_ENC_TUNING_INFO_LOSSLESS: v4l2_enc_hw_tuning_info_type =
+    4;
+#[doc = " Last value is Max value."]
+pub const v4l2_enc_hw_tuning_info_type_V4L2_ENC_TUNING_INFO_FORCE32: v4l2_enc_hw_tuning_info_type =
+    2147483647;
+#[doc = " Specifies the encoder HW Preset type."]
+pub type v4l2_enc_hw_tuning_info_type = ::std::os::raw::c_uint;
+#[doc = " Holds encoder HW Preset type parameters\n to be used with #V4L2_CID_MPEG_VIDEOENC_HW_PRESET_TYPE_PARAM IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_hw_preset_type_param_ {
+    #[doc = " Type in which the encoder hw preset is specified, one of type #v4l2_enc_hw_preset_type."]
+    pub hw_preset_type: v4l2_enc_hw_preset_type,
+    #[doc = " Boolean value indicating if encoder set to max clock."]
+    pub set_max_enc_clock: __u8,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_hw_preset_type_param_"]
+        [::std::mem::size_of::<v4l2_enc_hw_preset_type_param_>() - 24usize];
+    ["Alignment of v4l2_enc_hw_preset_type_param_"]
+        [::std::mem::align_of::<v4l2_enc_hw_preset_type_param_>() - 4usize];
+    ["Offset of field: v4l2_enc_hw_preset_type_param_::hw_preset_type"]
+        [::std::mem::offset_of!(v4l2_enc_hw_preset_type_param_, hw_preset_type) - 0usize];
+    ["Offset of field: v4l2_enc_hw_preset_type_param_::set_max_enc_clock"]
+        [::std::mem::offset_of!(v4l2_enc_hw_preset_type_param_, set_max_enc_clock) - 4usize];
+    ["Offset of field: v4l2_enc_hw_preset_type_param_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_hw_preset_type_param_, reserved) - 8usize];
+};
+#[doc = " Holds encoder HW Preset type parameters\n to be used with #V4L2_CID_MPEG_VIDEOENC_HW_PRESET_TYPE_PARAM IOCTL."]
+pub type v4l2_enc_hw_preset_type_param = v4l2_enc_hw_preset_type_param_;
+#[doc = " Slice size is specified in terms of number of bytes."]
+pub const v4l2_enc_slice_length_type_V4L2_ENC_SLICE_LENGTH_TYPE_BITS: v4l2_enc_slice_length_type =
+    0;
+#[doc = " Slice size is specified in terms of number of macroblocks."]
+pub const v4l2_enc_slice_length_type_V4L2_ENC_SLICE_LENGTH_TYPE_MBLK: v4l2_enc_slice_length_type =
+    1;
+#[doc = " Enum specifying the type of slice length."]
+pub type v4l2_enc_slice_length_type = ::std::os::raw::c_uint;
+#[doc = " Input metadata structure contains ROI parameters."]
+pub const v4l2_enc_input_metadata_param_V4L2_ENC_INPUT_ROI_PARAM_FLAG:
+    v4l2_enc_input_metadata_param = 1;
+#[doc = " Input metadata structure contains GDR parameters."]
+pub const v4l2_enc_input_metadata_param_V4L2_ENC_INPUT_GDR_PARAM_FLAG:
+    v4l2_enc_input_metadata_param = 2;
+#[doc = " Input metadata structure contains External RPS parameters."]
+pub const v4l2_enc_input_metadata_param_V4L2_ENC_INPUT_RPS_PARAM_FLAG:
+    v4l2_enc_input_metadata_param = 4;
+#[doc = " Input metadata structure contains External RC parameters."]
+pub const v4l2_enc_input_metadata_param_V4L2_ENC_INPUT_RC_PARAM_FLAG:
+    v4l2_enc_input_metadata_param = 8;
+#[doc = " Input metadata structure contains ReconCRC parameters."]
+pub const v4l2_enc_input_metadata_param_V4L2_ENC_INPUT_RECONCRC_PARAM_FLAG:
+    v4l2_enc_input_metadata_param = 16;
+#[doc = " Input metadata structure contains AV1 Tile Groups parameters."]
+pub const v4l2_enc_input_metadata_param_V4L2_ENC_INPUT_TG_PARAM_FLAG:
+    v4l2_enc_input_metadata_param = 32;
+#[doc = " Last value is Max value."]
+pub const v4l2_enc_input_metadata_param_V4L2_ENC_INPUT_FORCE32: v4l2_enc_input_metadata_param =
+    2147483647;
+#[doc = " Specifies the input buffer metadata flag."]
+pub type v4l2_enc_input_metadata_param = ::std::os::raw::c_uint;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_1_0_MAIN_TIER:
+    v4l2_mpeg_video_h265_level = 0;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_1_0_HIGH_TIER:
+    v4l2_mpeg_video_h265_level = 1;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_2_0_MAIN_TIER:
+    v4l2_mpeg_video_h265_level = 2;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_2_0_HIGH_TIER:
+    v4l2_mpeg_video_h265_level = 3;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_2_1_MAIN_TIER:
+    v4l2_mpeg_video_h265_level = 4;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_2_1_HIGH_TIER:
+    v4l2_mpeg_video_h265_level = 5;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_3_0_MAIN_TIER:
+    v4l2_mpeg_video_h265_level = 6;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_3_0_HIGH_TIER:
+    v4l2_mpeg_video_h265_level = 7;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_3_1_MAIN_TIER:
+    v4l2_mpeg_video_h265_level = 8;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_3_1_HIGH_TIER:
+    v4l2_mpeg_video_h265_level = 9;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_4_0_MAIN_TIER:
+    v4l2_mpeg_video_h265_level = 10;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_4_0_HIGH_TIER:
+    v4l2_mpeg_video_h265_level = 11;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_4_1_MAIN_TIER:
+    v4l2_mpeg_video_h265_level = 12;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_4_1_HIGH_TIER:
+    v4l2_mpeg_video_h265_level = 13;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_5_0_MAIN_TIER:
+    v4l2_mpeg_video_h265_level = 14;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_5_0_HIGH_TIER:
+    v4l2_mpeg_video_h265_level = 15;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_5_1_MAIN_TIER:
+    v4l2_mpeg_video_h265_level = 16;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_5_1_HIGH_TIER:
+    v4l2_mpeg_video_h265_level = 17;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_5_2_MAIN_TIER:
+    v4l2_mpeg_video_h265_level = 18;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_5_2_HIGH_TIER:
+    v4l2_mpeg_video_h265_level = 19;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_6_0_MAIN_TIER:
+    v4l2_mpeg_video_h265_level = 20;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_6_0_HIGH_TIER:
+    v4l2_mpeg_video_h265_level = 21;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_6_1_MAIN_TIER:
+    v4l2_mpeg_video_h265_level = 22;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_6_1_HIGH_TIER:
+    v4l2_mpeg_video_h265_level = 23;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_6_2_MAIN_TIER:
+    v4l2_mpeg_video_h265_level = 24;
+pub const v4l2_mpeg_video_h265_level_V4L2_MPEG_VIDEO_H265_LEVEL_6_2_HIGH_TIER:
+    v4l2_mpeg_video_h265_level = 25;
+#[doc = " Defines the possible levels for H.265 encoder."]
+pub type v4l2_mpeg_video_h265_level = ::std::os::raw::c_uint;
+#[doc = " Holds encoder slice length parameters, to be used with\n \\c V4L2_CID_MPEG_VIDEOENC_SLICE_LENGTH_PARAM IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_slice_length_param_ {
+    #[doc = " Type in which the slice length is specified, one of type \\c v4l2_enc_slice_length_type."]
+    pub slice_length_type: v4l2_enc_slice_length_type,
+    #[doc = " Size of the slice in either number of bytes or number of macro blocks."]
+    pub slice_length: __u32,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_slice_length_param_"]
+        [::std::mem::size_of::<v4l2_enc_slice_length_param_>() - 24usize];
+    ["Alignment of v4l2_enc_slice_length_param_"]
+        [::std::mem::align_of::<v4l2_enc_slice_length_param_>() - 4usize];
+    ["Offset of field: v4l2_enc_slice_length_param_::slice_length_type"]
+        [::std::mem::offset_of!(v4l2_enc_slice_length_param_, slice_length_type) - 0usize];
+    ["Offset of field: v4l2_enc_slice_length_param_::slice_length"]
+        [::std::mem::offset_of!(v4l2_enc_slice_length_param_, slice_length) - 4usize];
+    ["Offset of field: v4l2_enc_slice_length_param_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_slice_length_param_, reserved) - 8usize];
+};
+#[doc = " Holds encoder slice length parameters, to be used with\n \\c V4L2_CID_MPEG_VIDEOENC_SLICE_LENGTH_PARAM IOCTL."]
+pub type v4l2_enc_slice_length_param = v4l2_enc_slice_length_param_;
+#[doc = " Holds encoder virtual buffer size parameters, to be used with\n \\c V4L2_CID_MPEG_VIDEOENC_VIRTUALBUFFER_SIZE IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_virtual_buffer_size_ {
+    #[doc = " Size of the virtual buffer, in bits."]
+    pub size: __u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_virtual_buffer_size_"]
+        [::std::mem::size_of::<v4l2_enc_virtual_buffer_size_>() - 4usize];
+    ["Alignment of v4l2_enc_virtual_buffer_size_"]
+        [::std::mem::align_of::<v4l2_enc_virtual_buffer_size_>() - 4usize];
+    ["Offset of field: v4l2_enc_virtual_buffer_size_::size"]
+        [::std::mem::offset_of!(v4l2_enc_virtual_buffer_size_, size) - 0usize];
+};
+#[doc = " Holds encoder virtual buffer size parameters, to be used with\n \\c V4L2_CID_MPEG_VIDEOENC_VIRTUALBUFFER_SIZE IOCTL."]
+pub type v4l2_enc_virtual_buffer_size = v4l2_enc_virtual_buffer_size_;
+#[doc = " Holds encoder number of reference frame parameters, to be used with\n \\c V4L2_CID_MPEG_VIDEOENC_NUM_REFERENCE_FRAMES IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_num_ref_frames_ {
+    #[doc = " Number of reference frames."]
+    pub frames: __u32,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_num_ref_frames_"]
+        [::std::mem::size_of::<v4l2_enc_num_ref_frames_>() - 20usize];
+    ["Alignment of v4l2_enc_num_ref_frames_"]
+        [::std::mem::align_of::<v4l2_enc_num_ref_frames_>() - 4usize];
+    ["Offset of field: v4l2_enc_num_ref_frames_::frames"]
+        [::std::mem::offset_of!(v4l2_enc_num_ref_frames_, frames) - 0usize];
+    ["Offset of field: v4l2_enc_num_ref_frames_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_num_ref_frames_, reserved) - 4usize];
+};
+#[doc = " Holds encoder number of reference frame parameters, to be used with\n \\c V4L2_CID_MPEG_VIDEOENC_NUM_REFERENCE_FRAMES IOCTL."]
+pub type v4l2_enc_num_ref_frames = v4l2_enc_num_ref_frames_;
+#[doc = " Holds encoder slice intrareferesh parameters, to be used with\n \\c V4L2_CID_MPEG_VIDEOENC_SLICE_INTRAREFRESH_PARAM IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_slice_intrarefresh_param_ {
+    #[doc = " Slice intrarefresh interval, in number of slices."]
+    pub interval: __u32,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_slice_intrarefresh_param_"]
+        [::std::mem::size_of::<v4l2_enc_slice_intrarefresh_param_>() - 20usize];
+    ["Alignment of v4l2_enc_slice_intrarefresh_param_"]
+        [::std::mem::align_of::<v4l2_enc_slice_intrarefresh_param_>() - 4usize];
+    ["Offset of field: v4l2_enc_slice_intrarefresh_param_::interval"]
+        [::std::mem::offset_of!(v4l2_enc_slice_intrarefresh_param_, interval) - 0usize];
+    ["Offset of field: v4l2_enc_slice_intrarefresh_param_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_slice_intrarefresh_param_, reserved) - 4usize];
+};
+#[doc = " Holds encoder slice intrareferesh parameters, to be used with\n \\c V4L2_CID_MPEG_VIDEOENC_SLICE_INTRAREFRESH_PARAM IOCTL."]
+pub type v4l2_enc_slice_intrarefresh_param = v4l2_enc_slice_intrarefresh_param_;
+#[doc = " Holds the encoder quality parameters for a single ROI region."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_ROI_param_ {
+    #[doc = " Region of interest rectangle."]
+    pub ROIRect: v4l2_rect,
+    #[doc = " QP delta for the region."]
+    pub QPdelta: __s32,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_ROI_param_"][::std::mem::size_of::<v4l2_enc_ROI_param_>() - 36usize];
+    ["Alignment of v4l2_enc_ROI_param_"][::std::mem::align_of::<v4l2_enc_ROI_param_>() - 4usize];
+    ["Offset of field: v4l2_enc_ROI_param_::ROIRect"]
+        [::std::mem::offset_of!(v4l2_enc_ROI_param_, ROIRect) - 0usize];
+    ["Offset of field: v4l2_enc_ROI_param_::QPdelta"]
+        [::std::mem::offset_of!(v4l2_enc_ROI_param_, QPdelta) - 16usize];
+    ["Offset of field: v4l2_enc_ROI_param_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_ROI_param_, reserved) - 20usize];
+};
+#[doc = " Holds the encoder quality parameters for a single ROI region."]
+pub type v4l2_enc_ROI_param = v4l2_enc_ROI_param_;
+#[doc = " Holds the encoder frame ROI parameters\n to be used with #V4L2_CID_MPEG_VIDEOENC_ROI_PARAMS IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_frame_ROI_params_ {
+    #[doc = " Number of regions."]
+    pub num_ROI_regions: __u32,
+    #[doc = " Array of indiviudal ROI parameters."]
+    pub ROI_params: [v4l2_enc_ROI_param; 8usize],
+    #[doc = " Config store integer to which this control is to be applied.\n  This must be same as the value of config store of \\c v4l2_buffer to which\n  the ROI params is applied."]
+    pub config_store: __u32,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_frame_ROI_params_"]
+        [::std::mem::size_of::<v4l2_enc_frame_ROI_params_>() - 312usize];
+    ["Alignment of v4l2_enc_frame_ROI_params_"]
+        [::std::mem::align_of::<v4l2_enc_frame_ROI_params_>() - 4usize];
+    ["Offset of field: v4l2_enc_frame_ROI_params_::num_ROI_regions"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ROI_params_, num_ROI_regions) - 0usize];
+    ["Offset of field: v4l2_enc_frame_ROI_params_::ROI_params"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ROI_params_, ROI_params) - 4usize];
+    ["Offset of field: v4l2_enc_frame_ROI_params_::config_store"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ROI_params_, config_store) - 292usize];
+    ["Offset of field: v4l2_enc_frame_ROI_params_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ROI_params_, reserved) - 296usize];
+};
+#[doc = " Holds the encoder frame ROI parameters\n to be used with #V4L2_CID_MPEG_VIDEOENC_ROI_PARAMS IOCTL."]
+pub type v4l2_enc_frame_ROI_params = v4l2_enc_frame_ROI_params_;
+#[doc = " Holds the preprocessing enhancement initialization parameters\n to be used with #V4L2_CID_MPEG_VIDEOENC_PPE_INIT_PARAMS IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_ppe_init_params_ {
+    #[doc = " Boolean value indicating if PPE module should be enabled"]
+    pub enable_ppe: __u8,
+    #[doc = " Bit flags to enable/disable each individual feature"]
+    pub feature_flags: __u32,
+    #[doc = " Boolean value indicating if profiler should be enabled"]
+    pub enable_profiler: __u8,
+    #[doc = " The max number of milliseconds that the encoder should wait for each frame processing"]
+    pub wait_time_ms: __s32,
+    #[doc = " Maximum strength of QP delta map for TAQ"]
+    pub taq_max_qp_delta: __u8,
+    #[doc = " Boolean value indicating if TAQ should be applied for B-frames"]
+    pub taq_b_frame_mode: __u8,
+    #[doc = " Maximum strength of QP delta map for SAQ"]
+    pub saq_max_qp_delta: __u8,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 3usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_ppe_init_params_"]
+        [::std::mem::size_of::<v4l2_enc_ppe_init_params_>() - 32usize];
+    ["Alignment of v4l2_enc_ppe_init_params_"]
+        [::std::mem::align_of::<v4l2_enc_ppe_init_params_>() - 4usize];
+    ["Offset of field: v4l2_enc_ppe_init_params_::enable_ppe"]
+        [::std::mem::offset_of!(v4l2_enc_ppe_init_params_, enable_ppe) - 0usize];
+    ["Offset of field: v4l2_enc_ppe_init_params_::feature_flags"]
+        [::std::mem::offset_of!(v4l2_enc_ppe_init_params_, feature_flags) - 4usize];
+    ["Offset of field: v4l2_enc_ppe_init_params_::enable_profiler"]
+        [::std::mem::offset_of!(v4l2_enc_ppe_init_params_, enable_profiler) - 8usize];
+    ["Offset of field: v4l2_enc_ppe_init_params_::wait_time_ms"]
+        [::std::mem::offset_of!(v4l2_enc_ppe_init_params_, wait_time_ms) - 12usize];
+    ["Offset of field: v4l2_enc_ppe_init_params_::taq_max_qp_delta"]
+        [::std::mem::offset_of!(v4l2_enc_ppe_init_params_, taq_max_qp_delta) - 16usize];
+    ["Offset of field: v4l2_enc_ppe_init_params_::taq_b_frame_mode"]
+        [::std::mem::offset_of!(v4l2_enc_ppe_init_params_, taq_b_frame_mode) - 17usize];
+    ["Offset of field: v4l2_enc_ppe_init_params_::saq_max_qp_delta"]
+        [::std::mem::offset_of!(v4l2_enc_ppe_init_params_, saq_max_qp_delta) - 18usize];
+    ["Offset of field: v4l2_enc_ppe_init_params_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_ppe_init_params_, reserved) - 20usize];
+};
+#[doc = " Holds the preprocessing enhancement initialization parameters\n to be used with #V4L2_CID_MPEG_VIDEOENC_PPE_INIT_PARAMS IOCTL."]
+pub type v4l2_enc_ppe_init_params = v4l2_enc_ppe_init_params_;
 #[doc = " Holds the motion vector parameters for a single block.\n For H.264, nvenc provides one motion vector per 16x16 block(Macroblock).\n For H.265, nvenc provides one motion vector per 32x32 block(Coded Tree Block)."]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -2268,3 +2717,628 @@ const _: () = {
 };
 #[doc = " Holds the metadata parameters for video encoder and decoder.\n\n The metadata is valid for the buffer with index \\c buffer_index after the\n buffer is dequeued until it is queued again."]
 pub type v4l2_ctrl_video_metadata = v4l2_ctrl_video_metadata_;
+#[doc = " Holds the encoder GDR parameters\n to be used with #V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_gdr_params_ {
+    #[doc = " Parameter for GDR (Intra Refresh) for specified number of frames."]
+    pub nGDRFrames: __u32,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_gdr_params_"][::std::mem::size_of::<v4l2_enc_gdr_params_>() - 20usize];
+    ["Alignment of v4l2_enc_gdr_params_"][::std::mem::align_of::<v4l2_enc_gdr_params_>() - 4usize];
+    ["Offset of field: v4l2_enc_gdr_params_::nGDRFrames"]
+        [::std::mem::offset_of!(v4l2_enc_gdr_params_, nGDRFrames) - 0usize];
+    ["Offset of field: v4l2_enc_gdr_params_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_gdr_params_, reserved) - 4usize];
+};
+#[doc = " Holds the encoder GDR parameters\n to be used with #V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA IOCTL."]
+pub type v4l2_enc_gdr_params = v4l2_enc_gdr_params_;
+#[doc = " Holds the params to configure encoder for external rps control\n to be used with #V4L2_CID_MPEG_VIDEOENC_ENABLE_EXTERNAL_RPS_CONTROL IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_enable_ext_rps_ctrl_ {
+    #[doc = " Boolean value indicating if enabled External RPS control."]
+    pub bEnableExternalRPS: __u8,
+    #[doc = " Boolean value indicating if allowed gap in frame number."]
+    pub bGapsInFrameNumAllowed: __u8,
+    pub nH264FrameNumBits: __u32,
+    pub nH265PocLsbBits: __u32,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_enable_ext_rps_ctrl_"]
+        [::std::mem::size_of::<v4l2_enc_enable_ext_rps_ctrl_>() - 28usize];
+    ["Alignment of v4l2_enc_enable_ext_rps_ctrl_"]
+        [::std::mem::align_of::<v4l2_enc_enable_ext_rps_ctrl_>() - 4usize];
+    ["Offset of field: v4l2_enc_enable_ext_rps_ctrl_::bEnableExternalRPS"]
+        [::std::mem::offset_of!(v4l2_enc_enable_ext_rps_ctrl_, bEnableExternalRPS) - 0usize];
+    ["Offset of field: v4l2_enc_enable_ext_rps_ctrl_::bGapsInFrameNumAllowed"]
+        [::std::mem::offset_of!(v4l2_enc_enable_ext_rps_ctrl_, bGapsInFrameNumAllowed) - 1usize];
+    ["Offset of field: v4l2_enc_enable_ext_rps_ctrl_::nH264FrameNumBits"]
+        [::std::mem::offset_of!(v4l2_enc_enable_ext_rps_ctrl_, nH264FrameNumBits) - 4usize];
+    ["Offset of field: v4l2_enc_enable_ext_rps_ctrl_::nH265PocLsbBits"]
+        [::std::mem::offset_of!(v4l2_enc_enable_ext_rps_ctrl_, nH265PocLsbBits) - 8usize];
+    ["Offset of field: v4l2_enc_enable_ext_rps_ctrl_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_enable_ext_rps_ctrl_, reserved) - 12usize];
+};
+#[doc = " Holds the params to configure encoder for external rps control\n to be used with #V4L2_CID_MPEG_VIDEOENC_ENABLE_EXTERNAL_RPS_CONTROL IOCTL."]
+pub type v4l2_enc_enable_ext_rps_ctr = v4l2_enc_enable_ext_rps_ctrl_;
+#[doc = " Holds the encoder frame property."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _v4l2_enc_frame_prop {
+    #[doc = " unique Id."]
+    pub nFrameId: __u32,
+    #[doc = " Long Term Ref Flag."]
+    pub bLTRefFrame: __u8,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _v4l2_enc_frame_prop"][::std::mem::size_of::<_v4l2_enc_frame_prop>() - 24usize];
+    ["Alignment of _v4l2_enc_frame_prop"][::std::mem::align_of::<_v4l2_enc_frame_prop>() - 4usize];
+    ["Offset of field: _v4l2_enc_frame_prop::nFrameId"]
+        [::std::mem::offset_of!(_v4l2_enc_frame_prop, nFrameId) - 0usize];
+    ["Offset of field: _v4l2_enc_frame_prop::bLTRefFrame"]
+        [::std::mem::offset_of!(_v4l2_enc_frame_prop, bLTRefFrame) - 4usize];
+    ["Offset of field: _v4l2_enc_frame_prop::reserved"]
+        [::std::mem::offset_of!(_v4l2_enc_frame_prop, reserved) - 8usize];
+};
+#[doc = " Holds the encoder frame property."]
+pub type v4l2_enc_frame_prop = _v4l2_enc_frame_prop;
+#[doc = " Defines input metadata associated with H264 features."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_ctrl_h264enc_inputmetadata {
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u8; 128usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_ctrl_h264enc_inputmetadata"]
+        [::std::mem::size_of::<v4l2_ctrl_h264enc_inputmetadata>() - 128usize];
+    ["Alignment of v4l2_ctrl_h264enc_inputmetadata"]
+        [::std::mem::align_of::<v4l2_ctrl_h264enc_inputmetadata>() - 1usize];
+    ["Offset of field: v4l2_ctrl_h264enc_inputmetadata::reserved"]
+        [::std::mem::offset_of!(v4l2_ctrl_h264enc_inputmetadata, reserved) - 0usize];
+};
+#[doc = " Defines input metadata associated with H265 features."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_ctrl_hevcenc_inputmetadata {
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u8; 128usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_ctrl_hevcenc_inputmetadata"]
+        [::std::mem::size_of::<v4l2_ctrl_hevcenc_inputmetadata>() - 128usize];
+    ["Alignment of v4l2_ctrl_hevcenc_inputmetadata"]
+        [::std::mem::align_of::<v4l2_ctrl_hevcenc_inputmetadata>() - 1usize];
+    ["Offset of field: v4l2_ctrl_hevcenc_inputmetadata::reserved"]
+        [::std::mem::offset_of!(v4l2_ctrl_hevcenc_inputmetadata, reserved) - 0usize];
+};
+#[doc = " Defines input metadata associated with AV1 features."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_ctrl_av1enc_inputmetadata {
+    #[doc = " Refresh frame flags to inform which ref frame slots to update"]
+    pub refreshFrameFlags: __u8,
+    #[doc = " RPS paramter for current frame to use"]
+    pub refFrameIndex: [__u8; 8usize],
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u8; 119usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_ctrl_av1enc_inputmetadata"]
+        [::std::mem::size_of::<v4l2_ctrl_av1enc_inputmetadata>() - 128usize];
+    ["Alignment of v4l2_ctrl_av1enc_inputmetadata"]
+        [::std::mem::align_of::<v4l2_ctrl_av1enc_inputmetadata>() - 1usize];
+    ["Offset of field: v4l2_ctrl_av1enc_inputmetadata::refreshFrameFlags"]
+        [::std::mem::offset_of!(v4l2_ctrl_av1enc_inputmetadata, refreshFrameFlags) - 0usize];
+    ["Offset of field: v4l2_ctrl_av1enc_inputmetadata::refFrameIndex"]
+        [::std::mem::offset_of!(v4l2_ctrl_av1enc_inputmetadata, refFrameIndex) - 1usize];
+    ["Offset of field: v4l2_ctrl_av1enc_inputmetadata::reserved"]
+        [::std::mem::offset_of!(v4l2_ctrl_av1enc_inputmetadata, reserved) - 9usize];
+};
+#[doc = " Holds the encoder frame external rps control parameters\n to be used with #V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA IOCTL."]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct v4l2_enc_frame_ext_rps_ctrl_params_ {
+    #[doc = " unique Id of current frame."]
+    pub nFrameId: __u32,
+    #[doc = " Boolean value indicating if current frame referenced or non-referenced."]
+    pub bRefFrame: __u8,
+    #[doc = " Boolean value indicating if current frame long Term Ref Flag."]
+    pub bLTRefFrame: __u8,
+    #[doc = " Max Number of reference frames to use for inter-motion search."]
+    pub nMaxRefFrames: __u32,
+    #[doc = " # of valid entries in RPS, 0 means IDR."]
+    pub nActiveRefFrames: __u32,
+    #[doc = "  frame id of reference frame to be used for motion search, ignored for IDR."]
+    pub nCurrentRefFrameId: __u32,
+    #[doc = " Array of RPS"]
+    pub RPSList: [v4l2_enc_frame_prop; 8usize],
+    pub CodecParams: v4l2_enc_frame_ext_rps_ctrl_params___bindgen_ty_1,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 2usize],
+}
+#[doc = " Input Metadata for each codec"]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union v4l2_enc_frame_ext_rps_ctrl_params___bindgen_ty_1 {
+    #[doc = " H.264 specific metadata."]
+    pub pH264EncParams: *mut v4l2_ctrl_h264enc_inputmetadata,
+    #[doc = " H.265 specific metadata."]
+    pub pHEVCEncParams: *mut v4l2_ctrl_hevcenc_inputmetadata,
+    #[doc = " AV1 specific metadata."]
+    pub pAV1EncParams: *mut v4l2_ctrl_av1enc_inputmetadata,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_frame_ext_rps_ctrl_params___bindgen_ty_1"]
+        [::std::mem::size_of::<v4l2_enc_frame_ext_rps_ctrl_params___bindgen_ty_1>() - 8usize];
+    ["Alignment of v4l2_enc_frame_ext_rps_ctrl_params___bindgen_ty_1"]
+        [::std::mem::align_of::<v4l2_enc_frame_ext_rps_ctrl_params___bindgen_ty_1>() - 8usize];
+    ["Offset of field: v4l2_enc_frame_ext_rps_ctrl_params___bindgen_ty_1::pH264EncParams"][::std::mem::offset_of!(
+        v4l2_enc_frame_ext_rps_ctrl_params___bindgen_ty_1,
+        pH264EncParams
+    )
+        - 0usize];
+    ["Offset of field: v4l2_enc_frame_ext_rps_ctrl_params___bindgen_ty_1::pHEVCEncParams"][::std::mem::offset_of!(
+        v4l2_enc_frame_ext_rps_ctrl_params___bindgen_ty_1,
+        pHEVCEncParams
+    )
+        - 0usize];
+    ["Offset of field: v4l2_enc_frame_ext_rps_ctrl_params___bindgen_ty_1::pAV1EncParams"][::std::mem::offset_of!(
+        v4l2_enc_frame_ext_rps_ctrl_params___bindgen_ty_1,
+        pAV1EncParams
+    )
+        - 0usize];
+};
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_frame_ext_rps_ctrl_params_"]
+        [::std::mem::size_of::<v4l2_enc_frame_ext_rps_ctrl_params_>() - 232usize];
+    ["Alignment of v4l2_enc_frame_ext_rps_ctrl_params_"]
+        [::std::mem::align_of::<v4l2_enc_frame_ext_rps_ctrl_params_>() - 8usize];
+    ["Offset of field: v4l2_enc_frame_ext_rps_ctrl_params_::nFrameId"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rps_ctrl_params_, nFrameId) - 0usize];
+    ["Offset of field: v4l2_enc_frame_ext_rps_ctrl_params_::bRefFrame"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rps_ctrl_params_, bRefFrame) - 4usize];
+    ["Offset of field: v4l2_enc_frame_ext_rps_ctrl_params_::bLTRefFrame"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rps_ctrl_params_, bLTRefFrame) - 5usize];
+    ["Offset of field: v4l2_enc_frame_ext_rps_ctrl_params_::nMaxRefFrames"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rps_ctrl_params_, nMaxRefFrames) - 8usize];
+    ["Offset of field: v4l2_enc_frame_ext_rps_ctrl_params_::nActiveRefFrames"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rps_ctrl_params_, nActiveRefFrames) - 12usize];
+    ["Offset of field: v4l2_enc_frame_ext_rps_ctrl_params_::nCurrentRefFrameId"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rps_ctrl_params_, nCurrentRefFrameId) - 16usize];
+    ["Offset of field: v4l2_enc_frame_ext_rps_ctrl_params_::RPSList"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rps_ctrl_params_, RPSList) - 20usize];
+    ["Offset of field: v4l2_enc_frame_ext_rps_ctrl_params_::CodecParams"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rps_ctrl_params_, CodecParams) - 216usize];
+    ["Offset of field: v4l2_enc_frame_ext_rps_ctrl_params_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rps_ctrl_params_, reserved) - 224usize];
+};
+#[doc = " Holds the encoder frame external rps control parameters\n to be used with #V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA IOCTL."]
+pub type v4l2_enc_frame_ext_rps_ctrl_params = v4l2_enc_frame_ext_rps_ctrl_params_;
+#[doc = " Holds the params to configure encoder for external rate control mode\n to be used with #V4L2_CID_MPEG_VIDEOENC_ENABLE_EXTERNAL_RATE_CONTROL IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_enable_ext_rate_ctrl_ {
+    #[doc = " Boolean value indicating if enabled External Picture RC."]
+    pub bEnableExternalPictureRC: __u8,
+    #[doc = " Max QP per session when external picture RC enabled."]
+    pub nsessionMaxQP: __u32,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_enable_ext_rate_ctrl_"]
+        [::std::mem::size_of::<v4l2_enc_enable_ext_rate_ctrl_>() - 24usize];
+    ["Alignment of v4l2_enc_enable_ext_rate_ctrl_"]
+        [::std::mem::align_of::<v4l2_enc_enable_ext_rate_ctrl_>() - 4usize];
+    ["Offset of field: v4l2_enc_enable_ext_rate_ctrl_::bEnableExternalPictureRC"]
+        [::std::mem::offset_of!(v4l2_enc_enable_ext_rate_ctrl_, bEnableExternalPictureRC) - 0usize];
+    ["Offset of field: v4l2_enc_enable_ext_rate_ctrl_::nsessionMaxQP"]
+        [::std::mem::offset_of!(v4l2_enc_enable_ext_rate_ctrl_, nsessionMaxQP) - 4usize];
+    ["Offset of field: v4l2_enc_enable_ext_rate_ctrl_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_enable_ext_rate_ctrl_, reserved) - 8usize];
+};
+#[doc = " Holds the params to configure encoder for external rate control mode\n to be used with #V4L2_CID_MPEG_VIDEOENC_ENABLE_EXTERNAL_RATE_CONTROL IOCTL."]
+pub type v4l2_enc_enable_ext_rate_ctr = v4l2_enc_enable_ext_rate_ctrl_;
+#[doc = " Holds the encoder frame external rate control parameters\n to be used with #V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA ioctl."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_frame_ext_rate_ctrl_params_ {
+    #[doc = " Target frame bits."]
+    pub nTargetFrameBits: __u32,
+    #[doc = " Frame start QP."]
+    pub nFrameQP: __u32,
+    #[doc = " Frame min QP."]
+    pub nFrameMinQp: __u32,
+    #[doc = " Frame max QP."]
+    pub nFrameMaxQp: __u32,
+    #[doc = " Frame min QP deviation."]
+    pub nMaxQPDeviation: __u32,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_frame_ext_rate_ctrl_params_"]
+        [::std::mem::size_of::<v4l2_enc_frame_ext_rate_ctrl_params_>() - 36usize];
+    ["Alignment of v4l2_enc_frame_ext_rate_ctrl_params_"]
+        [::std::mem::align_of::<v4l2_enc_frame_ext_rate_ctrl_params_>() - 4usize];
+    ["Offset of field: v4l2_enc_frame_ext_rate_ctrl_params_::nTargetFrameBits"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rate_ctrl_params_, nTargetFrameBits) - 0usize];
+    ["Offset of field: v4l2_enc_frame_ext_rate_ctrl_params_::nFrameQP"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rate_ctrl_params_, nFrameQP) - 4usize];
+    ["Offset of field: v4l2_enc_frame_ext_rate_ctrl_params_::nFrameMinQp"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rate_ctrl_params_, nFrameMinQp) - 8usize];
+    ["Offset of field: v4l2_enc_frame_ext_rate_ctrl_params_::nFrameMaxQp"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rate_ctrl_params_, nFrameMaxQp) - 12usize];
+    ["Offset of field: v4l2_enc_frame_ext_rate_ctrl_params_::nMaxQPDeviation"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rate_ctrl_params_, nMaxQPDeviation) - 16usize];
+    ["Offset of field: v4l2_enc_frame_ext_rate_ctrl_params_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ext_rate_ctrl_params_, reserved) - 20usize];
+};
+#[doc = " Holds the encoder frame external rate control parameters\n to be used with #V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA ioctl."]
+pub type v4l2_enc_frame_ext_rate_ctrl_params = v4l2_enc_frame_ext_rate_ctrl_params_;
+#[doc = " Holds the params to configure encoder for ROI parameters encoding\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_ENABLE_ROI_PARAM IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_enable_roi_param_ {
+    #[doc = " Boolean value to indicating ROI param encoding."]
+    pub bEnableROI: __u8,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_enable_roi_param_"]
+        [::std::mem::size_of::<v4l2_enc_enable_roi_param_>() - 20usize];
+    ["Alignment of v4l2_enc_enable_roi_param_"]
+        [::std::mem::align_of::<v4l2_enc_enable_roi_param_>() - 4usize];
+    ["Offset of field: v4l2_enc_enable_roi_param_::bEnableROI"]
+        [::std::mem::offset_of!(v4l2_enc_enable_roi_param_, bEnableROI) - 0usize];
+    ["Offset of field: v4l2_enc_enable_roi_param_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_enable_roi_param_, reserved) - 4usize];
+};
+#[doc = " Holds the params to configure encoder for ROI parameters encoding\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_ENABLE_ROI_PARAM IOCTL."]
+pub type v4l2_enc_enable_roi_param = v4l2_enc_enable_roi_param_;
+#[doc = " Holds the params to configure encoder for Reconstructed CRC encoding\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_ENABLE_RECONCRC_PARAM IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_enable_reconcrc_param_ {
+    #[doc = " Boolean value to indicating Reconstructed CRC encoding."]
+    pub bEnableReconCRC: __u8,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_enable_reconcrc_param_"]
+        [::std::mem::size_of::<v4l2_enc_enable_reconcrc_param_>() - 20usize];
+    ["Alignment of v4l2_enc_enable_reconcrc_param_"]
+        [::std::mem::align_of::<v4l2_enc_enable_reconcrc_param_>() - 4usize];
+    ["Offset of field: v4l2_enc_enable_reconcrc_param_::bEnableReconCRC"]
+        [::std::mem::offset_of!(v4l2_enc_enable_reconcrc_param_, bEnableReconCRC) - 0usize];
+    ["Offset of field: v4l2_enc_enable_reconcrc_param_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_enable_reconcrc_param_, reserved) - 4usize];
+};
+#[doc = " Holds the params to configure encoder for Reconstructed CRC encoding\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_ENABLE_RECONCRC_PARAM IOCTL."]
+pub type v4l2_enc_enable_reconcrc_param = v4l2_enc_enable_reconcrc_param_;
+#[doc = " Holds the encoder frame Reconstructed CRC parameters.\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_frame_ReconCRC_params_ {
+    #[doc = " Rectangle to specify the co-ordinates of the input frame\n used to calculate reconstructed picture CRC."]
+    pub ReconCRCRect: v4l2_rect,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_frame_ReconCRC_params_"]
+        [::std::mem::size_of::<v4l2_enc_frame_ReconCRC_params_>() - 32usize];
+    ["Alignment of v4l2_enc_frame_ReconCRC_params_"]
+        [::std::mem::align_of::<v4l2_enc_frame_ReconCRC_params_>() - 4usize];
+    ["Offset of field: v4l2_enc_frame_ReconCRC_params_::ReconCRCRect"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ReconCRC_params_, ReconCRCRect) - 0usize];
+    ["Offset of field: v4l2_enc_frame_ReconCRC_params_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_frame_ReconCRC_params_, reserved) - 16usize];
+};
+#[doc = " Holds the encoder frame Reconstructed CRC parameters.\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA IOCTL."]
+pub type v4l2_enc_frame_ReconCRC_params = v4l2_enc_frame_ReconCRC_params_;
+#[doc = " Holds the encoder frame AV1 Tile groups.\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_frame_tile_groups_params_ {
+    #[doc = " Tile group related parameters"]
+    pub tileRows: __u8,
+    pub tileCols: __u8,
+    pub tileGroups: __u8,
+    pub tileIndexGroup: [__u8; 128usize],
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u8; 128usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_frame_tile_groups_params_"]
+        [::std::mem::size_of::<v4l2_enc_frame_tile_groups_params_>() - 259usize];
+    ["Alignment of v4l2_enc_frame_tile_groups_params_"]
+        [::std::mem::align_of::<v4l2_enc_frame_tile_groups_params_>() - 1usize];
+    ["Offset of field: v4l2_enc_frame_tile_groups_params_::tileRows"]
+        [::std::mem::offset_of!(v4l2_enc_frame_tile_groups_params_, tileRows) - 0usize];
+    ["Offset of field: v4l2_enc_frame_tile_groups_params_::tileCols"]
+        [::std::mem::offset_of!(v4l2_enc_frame_tile_groups_params_, tileCols) - 1usize];
+    ["Offset of field: v4l2_enc_frame_tile_groups_params_::tileGroups"]
+        [::std::mem::offset_of!(v4l2_enc_frame_tile_groups_params_, tileGroups) - 2usize];
+    ["Offset of field: v4l2_enc_frame_tile_groups_params_::tileIndexGroup"]
+        [::std::mem::offset_of!(v4l2_enc_frame_tile_groups_params_, tileIndexGroup) - 3usize];
+    ["Offset of field: v4l2_enc_frame_tile_groups_params_::reserved"]
+        [::std::mem::offset_of!(v4l2_enc_frame_tile_groups_params_, reserved) - 131usize];
+};
+#[doc = " Holds the encoder frame AV1 Tile groups.\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA IOCTL."]
+pub type v4l2_enc_frame_tile_groups_params = v4l2_enc_frame_tile_groups_params_;
+#[doc = " Holds the encoder frame input metadata parameters.\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_ctrl_videoenc_input_metadata_ {
+    #[doc = " Flag to indicate which inputbuffer metadata is valid."]
+    pub flag: __u32,
+    #[doc = " Pointer to the ROI params structure when ROI param is in metadata_flag."]
+    pub VideoEncROIParams: *mut v4l2_enc_frame_ROI_params,
+    #[doc = " Pointer to the Reconstructed CRC parameter structure when ReconCRC param is in\n metadata flag."]
+    pub VideoReconCRCParams: *mut v4l2_enc_frame_ReconCRC_params,
+    #[doc = " Pointer to the GDR params structure when GDR param is in metadata_flag."]
+    pub VideoEncGDRParams: *mut v4l2_enc_gdr_params,
+    #[doc = " Pointer to the External RPL control parameter structure when RPS param is in\n metadata flag."]
+    pub VideoEncRPSParams: *mut v4l2_enc_frame_ext_rps_ctrl_params,
+    #[doc = " Pointer to the External Rate control parameter structure when RC param is in\n metadata flag."]
+    pub VideoEncExtRCParams: *mut v4l2_enc_frame_ext_rate_ctrl_params,
+    #[doc = " Pointer to the AV1 Tile Groups parameter structure when TG param is in\n metadata flag."]
+    pub VideoEncAV1TGParams: *mut v4l2_enc_frame_tile_groups_params,
+    #[doc = " Config store integer to which these parameters are to be applied.\n  This must be same as the value of config store of queued v4l2_buffer\n   for which these parameters are valid."]
+    pub config_store: __u32,
+    #[doc = " Reserved fields are added for extensibility."]
+    pub reserved: [__u32; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_ctrl_videoenc_input_metadata_"]
+        [::std::mem::size_of::<v4l2_ctrl_videoenc_input_metadata_>() - 72usize];
+    ["Alignment of v4l2_ctrl_videoenc_input_metadata_"]
+        [::std::mem::align_of::<v4l2_ctrl_videoenc_input_metadata_>() - 8usize];
+    ["Offset of field: v4l2_ctrl_videoenc_input_metadata_::flag"]
+        [::std::mem::offset_of!(v4l2_ctrl_videoenc_input_metadata_, flag) - 0usize];
+    ["Offset of field: v4l2_ctrl_videoenc_input_metadata_::VideoEncROIParams"]
+        [::std::mem::offset_of!(v4l2_ctrl_videoenc_input_metadata_, VideoEncROIParams) - 8usize];
+    ["Offset of field: v4l2_ctrl_videoenc_input_metadata_::VideoReconCRCParams"]
+        [::std::mem::offset_of!(v4l2_ctrl_videoenc_input_metadata_, VideoReconCRCParams) - 16usize];
+    ["Offset of field: v4l2_ctrl_videoenc_input_metadata_::VideoEncGDRParams"]
+        [::std::mem::offset_of!(v4l2_ctrl_videoenc_input_metadata_, VideoEncGDRParams) - 24usize];
+    ["Offset of field: v4l2_ctrl_videoenc_input_metadata_::VideoEncRPSParams"]
+        [::std::mem::offset_of!(v4l2_ctrl_videoenc_input_metadata_, VideoEncRPSParams) - 32usize];
+    ["Offset of field: v4l2_ctrl_videoenc_input_metadata_::VideoEncExtRCParams"]
+        [::std::mem::offset_of!(v4l2_ctrl_videoenc_input_metadata_, VideoEncExtRCParams) - 40usize];
+    ["Offset of field: v4l2_ctrl_videoenc_input_metadata_::VideoEncAV1TGParams"]
+        [::std::mem::offset_of!(v4l2_ctrl_videoenc_input_metadata_, VideoEncAV1TGParams) - 48usize];
+    ["Offset of field: v4l2_ctrl_videoenc_input_metadata_::config_store"]
+        [::std::mem::offset_of!(v4l2_ctrl_videoenc_input_metadata_, config_store) - 56usize];
+    ["Offset of field: v4l2_ctrl_videoenc_input_metadata_::reserved"]
+        [::std::mem::offset_of!(v4l2_ctrl_videoenc_input_metadata_, reserved) - 60usize];
+};
+#[doc = " Holds the encoder frame input metadata parameters.\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_INPUT_METADATA IOCTL."]
+pub type v4l2_ctrl_videoenc_input_metadata = v4l2_ctrl_videoenc_input_metadata_;
+#[doc = " Holds the encoder frame min/max QP parameters.\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_QP_RANGE IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _v4l2_ctrl_video_qp_range {
+    #[doc = " Minimum QP value for I frame."]
+    pub MinQpI: __u32,
+    #[doc = " Maximum QP value for I frame."]
+    pub MaxQpI: __u32,
+    #[doc = " Minimum QP value for P frame."]
+    pub MinQpP: __u32,
+    #[doc = " Maximum QP value for P frame."]
+    pub MaxQpP: __u32,
+    #[doc = " Minimum QP value for B frame."]
+    pub MinQpB: __u32,
+    #[doc = " Maximum QP value for B frame."]
+    pub MaxQpB: __u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _v4l2_ctrl_video_qp_range"]
+        [::std::mem::size_of::<_v4l2_ctrl_video_qp_range>() - 24usize];
+    ["Alignment of _v4l2_ctrl_video_qp_range"]
+        [::std::mem::align_of::<_v4l2_ctrl_video_qp_range>() - 4usize];
+    ["Offset of field: _v4l2_ctrl_video_qp_range::MinQpI"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_qp_range, MinQpI) - 0usize];
+    ["Offset of field: _v4l2_ctrl_video_qp_range::MaxQpI"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_qp_range, MaxQpI) - 4usize];
+    ["Offset of field: _v4l2_ctrl_video_qp_range::MinQpP"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_qp_range, MinQpP) - 8usize];
+    ["Offset of field: _v4l2_ctrl_video_qp_range::MaxQpP"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_qp_range, MaxQpP) - 12usize];
+    ["Offset of field: _v4l2_ctrl_video_qp_range::MinQpB"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_qp_range, MinQpB) - 16usize];
+    ["Offset of field: _v4l2_ctrl_video_qp_range::MaxQpB"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_qp_range, MaxQpB) - 20usize];
+};
+#[doc = " Holds the encoder frame min/max QP parameters.\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_QP_RANGE IOCTL."]
+pub type v4l2_ctrl_video_qp_range = _v4l2_ctrl_video_qp_range;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _v4l2_ctrl_video_constqp {
+    pub constQpI: __u32,
+    pub constQpP: __u32,
+    pub constQpB: __u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _v4l2_ctrl_video_constqp"]
+        [::std::mem::size_of::<_v4l2_ctrl_video_constqp>() - 12usize];
+    ["Alignment of _v4l2_ctrl_video_constqp"]
+        [::std::mem::align_of::<_v4l2_ctrl_video_constqp>() - 4usize];
+    ["Offset of field: _v4l2_ctrl_video_constqp::constQpI"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_constqp, constQpI) - 0usize];
+    ["Offset of field: _v4l2_ctrl_video_constqp::constQpP"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_constqp, constQpP) - 4usize];
+    ["Offset of field: _v4l2_ctrl_video_constqp::constQpB"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_constqp, constQpB) - 8usize];
+};
+pub type v4l2_ctrl_video_constqp = _v4l2_ctrl_video_constqp;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _v4l2_ctrl_video_framerate {
+    pub fps_n: __u32,
+    pub fps_d: __u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _v4l2_ctrl_video_framerate"]
+        [::std::mem::size_of::<_v4l2_ctrl_video_framerate>() - 8usize];
+    ["Alignment of _v4l2_ctrl_video_framerate"]
+        [::std::mem::align_of::<_v4l2_ctrl_video_framerate>() - 4usize];
+    ["Offset of field: _v4l2_ctrl_video_framerate::fps_n"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_framerate, fps_n) - 0usize];
+    ["Offset of field: _v4l2_ctrl_video_framerate::fps_d"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_framerate, fps_d) - 4usize];
+};
+pub type v4l2_ctrl_video_framerate = _v4l2_ctrl_video_framerate;
+#[doc = " Holds the encoder init QP parameters.\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_INIT_FRAME_QP IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _v4l2_ctrl_video_init_qp {
+    #[doc = " Initial QP value for I frame."]
+    pub IInitQP: __u32,
+    #[doc = " Initial QP value for P frame."]
+    pub PInitQP: __u32,
+    #[doc = " Initial QP value for B frame."]
+    pub BInitQP: __u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _v4l2_ctrl_video_init_qp"]
+        [::std::mem::size_of::<_v4l2_ctrl_video_init_qp>() - 12usize];
+    ["Alignment of _v4l2_ctrl_video_init_qp"]
+        [::std::mem::align_of::<_v4l2_ctrl_video_init_qp>() - 4usize];
+    ["Offset of field: _v4l2_ctrl_video_init_qp::IInitQP"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_init_qp, IInitQP) - 0usize];
+    ["Offset of field: _v4l2_ctrl_video_init_qp::PInitQP"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_init_qp, PInitQP) - 4usize];
+    ["Offset of field: _v4l2_ctrl_video_init_qp::BInitQP"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_init_qp, BInitQP) - 8usize];
+};
+#[doc = " Holds the encoder init QP parameters.\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_INIT_FRAME_QP IOCTL."]
+pub type v4l2_ctrl_video_init_qp = _v4l2_ctrl_video_init_qp;
+#[doc = " Holds the params to configure tiles for AV1 encoding\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_AV1_TILE_CONFIGURATION IOCTL."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_enc_av1_tile_config_ {
+    #[doc = " Boolean value to enable multi-tile"]
+    pub bEnableTile: __u8,
+    #[doc = " Log2 Tile Rows"]
+    pub nLog2RowTiles: __u32,
+    #[doc = " Log2 Tile Columns"]
+    pub nLog2ColTiles: __u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_enc_av1_tile_config_"]
+        [::std::mem::size_of::<v4l2_enc_av1_tile_config_>() - 12usize];
+    ["Alignment of v4l2_enc_av1_tile_config_"]
+        [::std::mem::align_of::<v4l2_enc_av1_tile_config_>() - 4usize];
+    ["Offset of field: v4l2_enc_av1_tile_config_::bEnableTile"]
+        [::std::mem::offset_of!(v4l2_enc_av1_tile_config_, bEnableTile) - 0usize];
+    ["Offset of field: v4l2_enc_av1_tile_config_::nLog2RowTiles"]
+        [::std::mem::offset_of!(v4l2_enc_av1_tile_config_, nLog2RowTiles) - 4usize];
+    ["Offset of field: v4l2_enc_av1_tile_config_::nLog2ColTiles"]
+        [::std::mem::offset_of!(v4l2_enc_av1_tile_config_, nLog2ColTiles) - 8usize];
+};
+#[doc = " Holds the params to configure tiles for AV1 encoding\n\n Must be used with #V4L2_CID_MPEG_VIDEOENC_AV1_TILE_CONFIGURATION IOCTL."]
+pub type v4l2_enc_av1_tile_config = v4l2_enc_av1_tile_config_;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct v4l2_ctrl_video_displaydata_ {
+    pub masteringdisplaydatapresent: __u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of v4l2_ctrl_video_displaydata_"]
+        [::std::mem::size_of::<v4l2_ctrl_video_displaydata_>() - 4usize];
+    ["Alignment of v4l2_ctrl_video_displaydata_"]
+        [::std::mem::align_of::<v4l2_ctrl_video_displaydata_>() - 4usize];
+    ["Offset of field: v4l2_ctrl_video_displaydata_::masteringdisplaydatapresent"][::std::mem::offset_of!(
+        v4l2_ctrl_video_displaydata_,
+        masteringdisplaydatapresent
+    ) - 0usize];
+};
+pub type v4l2_ctrl_video_displaydata = v4l2_ctrl_video_displaydata_;
+#[doc = " HDR Metadata."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _v4l2_ctrl_video_hdrmasteringdisplaydata {
+    pub display_primaries_x: [__u16; 3usize],
+    pub display_primaries_y: [__u16; 3usize],
+    pub white_point_x: __u16,
+    pub white_point_y: __u16,
+    pub max_display_parameter_luminance: __u32,
+    pub min_display_parameter_luminance: __u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _v4l2_ctrl_video_hdrmasteringdisplaydata"]
+        [::std::mem::size_of::<_v4l2_ctrl_video_hdrmasteringdisplaydata>() - 24usize];
+    ["Alignment of _v4l2_ctrl_video_hdrmasteringdisplaydata"]
+        [::std::mem::align_of::<_v4l2_ctrl_video_hdrmasteringdisplaydata>() - 4usize];
+    ["Offset of field: _v4l2_ctrl_video_hdrmasteringdisplaydata::display_primaries_x"][::std::mem::offset_of!(
+        _v4l2_ctrl_video_hdrmasteringdisplaydata,
+        display_primaries_x
+    ) - 0usize];
+    ["Offset of field: _v4l2_ctrl_video_hdrmasteringdisplaydata::display_primaries_y"][::std::mem::offset_of!(
+        _v4l2_ctrl_video_hdrmasteringdisplaydata,
+        display_primaries_y
+    ) - 6usize];
+    ["Offset of field: _v4l2_ctrl_video_hdrmasteringdisplaydata::white_point_x"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_hdrmasteringdisplaydata, white_point_x) - 12usize];
+    ["Offset of field: _v4l2_ctrl_video_hdrmasteringdisplaydata::white_point_y"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_hdrmasteringdisplaydata, white_point_y) - 14usize];
+    ["Offset of field: _v4l2_ctrl_video_hdrmasteringdisplaydata::max_display_parameter_luminance"] [:: std :: mem :: offset_of ! (_v4l2_ctrl_video_hdrmasteringdisplaydata , max_display_parameter_luminance) - 16usize] ;
+    ["Offset of field: _v4l2_ctrl_video_hdrmasteringdisplaydata::min_display_parameter_luminance"] [:: std :: mem :: offset_of ! (_v4l2_ctrl_video_hdrmasteringdisplaydata , min_display_parameter_luminance) - 20usize] ;
+};
+#[doc = " HDR Metadata."]
+pub type v4l2_ctrl_video_hdrmasteringdisplaydata = _v4l2_ctrl_video_hdrmasteringdisplaydata;
+#[doc = " Poll device"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _v4l2_ctrl_video_device_poll {
+    pub req_events: __u16,
+    pub resp_events: __u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _v4l2_ctrl_video_device_poll"]
+        [::std::mem::size_of::<_v4l2_ctrl_video_device_poll>() - 4usize];
+    ["Alignment of _v4l2_ctrl_video_device_poll"]
+        [::std::mem::align_of::<_v4l2_ctrl_video_device_poll>() - 2usize];
+    ["Offset of field: _v4l2_ctrl_video_device_poll::req_events"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_device_poll, req_events) - 0usize];
+    ["Offset of field: _v4l2_ctrl_video_device_poll::resp_events"]
+        [::std::mem::offset_of!(_v4l2_ctrl_video_device_poll, resp_events) - 2usize];
+};
+#[doc = " Poll device"]
+pub type v4l2_ctrl_video_device_poll = _v4l2_ctrl_video_device_poll;
